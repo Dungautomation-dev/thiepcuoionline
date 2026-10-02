@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thiệp Cưới Online - Mạnh Dũng &amp; Mai Chi 💍✨</title>
+  <meta name="description" content="Trân trọng kính mời quý khách đến tham dự lễ thành hôn của Mạnh Dũng &amp; Mai Chi. Thiệp cưới online tương tác, nhạc nền lãng mạn, album ảnh và xác nhận tham dự RSVP.">
+  <meta name="author" content="Dung Automation">
+
+  <!-- OpenGraph Metadata for Facebook & Zalo Sharing -->
+  <meta property="og:title" content="Thiệp Cưới Online - Mạnh Dũng &amp; Mai Chi 💍✨">
+  <meta property="og:description" content="Trân trọng kính mời quý khách đến tham dự lễ thành hôn của chúng mình! Chạm để mở thiệp và xem thông tin hôn lễ.">
+  <meta property="og:image" content="assets/images/wedding-hero.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/wedding-rings.jpg" type="image/jpeg">
+
+  <!-- Google Fonts: Great Vibes, Dancing Script, Playfair Display, Montserrat, Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Floating Hearts Physics Canvas -->
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- Top Fixed Action Toolbar -->
+  <header class="top-toolbar">
+    <a href="https://github.com/Dungautomation-dev/thiepcuoionline" target="_blank" rel="noopener noreferrer" class="tool-btn btn-github" title="Mã nguồn GitHub / View GitHub Repository" aria-label="GitHub Repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="admin.html" class="tool-btn btn-admin" title="Trang Quản Trị &amp; Tạo Link Mời Hàng Loạt">
+      <i class="fa-solid fa-crown"></i>
+      <span>Quản Trị</span>
+    </a>
+    <button class="tool-btn" onclick="WeddingAudio.toggle()" title="Bật/Tắt Nhạc Nền">
+      <i class="fa-solid fa-music"></i>
+    </button>
+    <button class="tool-btn" onclick="window.triggerHeartBurst(window.innerWidth/2, window.innerHeight*0.35, 30)" title="Thả Tim Chúc Mừng">
+      <i class="fa-solid fa-heart" style="color:var(--rose-blush);"></i>
+    </button>
+  </header>
+
+  <!-- ========================================================================
+       1. ENVELOPE ENTRANCE MODAL (LUXURY WAX SEAL REVEAL)
+       ================================---------------------------------------- -->
+  <div class="envelope-overlay" id="envelope-modal">
+    <div class="envelope-card">
+      <div class="envelope-decor-corner top-left"></div>
+      <div class="envelope-decor-corner top-right"></div>
+      <div class="envelope-decor-corner bottom-left"></div>
+      <div class="envelope-decor-corner bottom-right"></div>
+
+      <div class="envelope-subtitle">Wedding Invitation</div>
+      <h1 class="envelope-couple" id="envelope-couple-names">Mạnh Dũng &amp; Mai Chi</h1>
+
+      <div class="envelope-divider">
+        <i class="fa-solid fa-rings-wedding fa-beat"></i>
+      </div>
+
+      <div class="envelope-guest-box">
+        <div class="envelope-guest-label">Trân trọng kính mời</div>
+        <div class="envelope-guest-name" id="envelope-guest-name">Quý Khách &amp; Gia Đình</div>
+      </div>
+
+      <button type="button" class="wax-seal-btn" id="btn-open-envelope" title="Bấm để mở thiệp cưới">
+        <div class="wax-stamp">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="wax-seal-text">
+          <i class="fa-solid fa-envelope-open-text" style="margin-right:6px;"></i>Chạm Mở Thiệp Mời
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. MAIN INVITATION PRESENTATION
+       ======================================================================== -->
+  <main class="main-wrapper">
+
+    <!-- Hero Card Section -->
+    <section class="hero-card">
+      <div class="hero-guest-callout">
+        <span class="guest-title">Trân trọng kính mời:</span>
+        <span class="guest-highlight" id="hero-guest-name">Quý Khách &amp; Gia Đình</span>
+      </div>
+
+      <div class="hero-wedding-announcement">Tới dự lễ thành hôn của</div>
+      <h1 class="hero-couple-names" id="hero-couple-names">Mạnh Dũng &amp; Mai Chi</h1>
+
+      <p class="hero-quote">
+        "Tình yêu không phải là nhìn nhau, mà là cùng nhau nhìn về một hướng. Thật hạnh phúc khi ngày trọng đại nhất cuộc đời chúng mình có sự hiện diện và chúc phúc của bạn!"
+      </p>
+
+      <!-- Main Wedding Big Photo Frame -->
+      <div class="hero-photo-frame">
+        <img src="assets/images/wedding-hero.jpg" alt="Ảnh cưới Mạnh Dũng &amp; Mai Chi">
+      </div>
+
+      <!-- Real-time Wedding Countdown Timer -->
+      <div class="countdown-box">
+        <div class="countdown-title">
+          <i class="fa-solid fa-clock" style="color:var(--ruby-primary);"></i>
+          <span>Đếm ngược ngày chung đôi</span>
+        </div>
+        <div class="countdown-grid">
+          <div class="countdown-unit">
+            <div class="countdown-num" id="count-days">00</div>
+            <div class="countdown-label">Ngày</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="count-hours">00</div>
+            <div class="countdown-label">Giờ</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="count-minutes">00</div>
+            <div class="countdown-label">Phút</div>
+          </div>
+          <div class="countdown-unit">
+            <div class="countdown-num" id="count-seconds">00</div>
+            <div class="countdown-label">Giây</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. BRIDE & GROOM PROFILES SECTION
+         ======================================================================== -->
+    <section class="couple-section">
+      <div class="section-heading">
+        <span class="section-tag"><i class="fa-solid fa-heart"></i> Cô Dâu &amp; Chú Rể</span>
+        <h2 class="section-title">Cặp Đôi Hạnh Phúc</h2>
+        <p class="section-subtitle">Hai tâm hồn đồng điệu, một hành trình yêu thương và sự gắn kết trọn đời.</p>
+      </div>
+
+      <div class="couple-grid">
+        <!-- Groom Card -->
+        <div class="couple-card">
+          <div class="couple-avatar-frame">
+            <img src="assets/images/groom.jpg" alt="Chú rể Nguyễn Mạnh Dũng">
+          </div>
+          <div class="couple-role">Chú Rể (The Groom)</div>
+          <h3 class="couple-name" id="groom-fullname">Nguyễn Mạnh Dũng</h3>
+          <p class="couple-bio" id="groom-parents">
+            Trưởng nam của: Ông Nguyễn Văn Tuấn &amp; Bà Trần Thị Thu
+          </p>
+          <p class="couple-bio">
+            "Cảm ơn em đã bước vào cuộc đời anh, biến những ngày bình thường thành những khoảnh khắc rực rỡ và ấm áp nhất."
+          </p>
+          <div class="couple-socials">
+            <a href="https://facebook.com" target="_blank" class="couple-social-link" title="Facebook Chú Rể"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="tel:0988123456" class="couple-social-link" title="Gọi Chú Rể"><i class="fa-solid fa-phone"></i></a>
+          </div>
+        </div>
+
+        <!-- Center Monogram Divider -->
+        <div class="couple-heart-divider">
+          <div class="monogram-badge">&amp;</div>
+          <i class="fa-solid fa-heart fa-beat" style="margin-top:12px; font-size:1.5rem; color:var(--ruby-primary);"></i>
+        </div>
+
+        <!-- Bride Card -->
+        <div class="couple-card">
+          <div class="couple-avatar-frame">
+            <img src="assets/images/bride.jpg" alt="Cô dâu Lê Mai Chi">
+          </div>
+          <div class="couple-role">Cô Dâu (The Bride)</div>
+          <h3 class="couple-name" id="bride-fullname">Lê Mai Chi</h3>
+          <p class="couple-bio" id="bride-parents">
+            Ái nữ của: Ông Lê Quang Huy &amp; Bà Phạm Thị Lan
+          </p>
+          <p class="couple-bio">
+            "Bên anh, em luôn tìm thấy sự bình yên và yêu thương vô điều kiện. Mong rằng chúng ta sẽ cùng nhau già đi với nụ cười vẹn nguyên."
+          </p>
+          <div class="couple-socials">
+            <a href="https://facebook.com" target="_blank" class="couple-social-link" title="Facebook Cô Dâu"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="tel:0977654321" class="couple-social-link" title="Gọi Cô Dâu"><i class="fa-solid fa-phone"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. WEDDING CEREMONIES & GOOGLE MAPS SECTION
+         ======================================================================== -->
+    <section class="events-section">
+      <div class="section-heading">
+        <span class="section-tag"><i class="fa-solid fa-calendar-check"></i> Thời Gian &amp; Địa Điểm</span>
+        <h2 class="section-title">Sự Kiện Hôn Lễ</h2>
+        <p class="section-subtitle">Trân trọng kính mời quý khách tới chung vui cùng hai gia đình chúng mình.</p>
+      </div>
+
+      <div class="events-grid">
+        <!-- Event: Groom Party -->
+        <div class="event-card">
+          <div class="event-card-header">
+            <span class="event-type-badge">Tiệc Nhà Trai</span>
+            <h3 class="event-name" id="ceremony-groom-title">Lễ Thành Hôn</h3>
+          </div>
+          <div class="event-card-body">
+            <div class="event-info-row">
+              <div class="event-info-icon"><i class="fa-solid fa-clock"></i></div>
+              <div class="event-info-text">
+                <strong>Thời Gian Tổ Chức</strong>
+                <span id="ceremony-groom-time">11:00 - Thứ Bảy, Ngày 20/11/2026</span>
+              </div>
+            </div>
+
+            <div class="event-info-row">
+              <div class="event-info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+              <div class="event-info-text">
+                <strong id="ceremony-groom-venue">Trung Tâm Tiệc Cưới Trống Đồng Palace</strong>
+                <span id="ceremony-groom-address">Số 489 Hoàng Quốc Việt, Cầu Giấy, Hà Nội</span>
+              </div>
+            </div>
+
+            <!-- Embedded Google Map -->
+            <div class="event-map-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.633857393439!2d105.78768917604533!3d21.047330787139965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab36181d583b%3A0xe5a36aa9d29fc676!2zNDg5IEhvw6BuZyBRdeG7k2MgVmnhu4d0LCBD4buVIE5odeG6vywgQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Bản đồ Tiệc Nhà Trai">
+              </iframe>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://maps.google.com/?q=489+Hoang+Quoc+Viet+Cau+Giay+Ha+Noi" target="_blank" class="btn-direction" id="ceremony-groom-map-link">
+                <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+              </a>
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+M%E1%BA%A1nh+D%C5%A9ng+%26+Mai+Chi&dates=20261120T040000Z/20261120T080000Z&location=489+Hoang+Quoc+Viet+Cau+Giay+Ha+Noi" target="_blank" class="btn-calendar" title="Thêm vào Google Calendar">
+                <i class="fa-solid fa-calendar-plus"></i> Lưu Lịch
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event: Bride Party -->
+        <div class="event-card">
+          <div class="event-card-header">
+            <span class="event-type-badge">Tiệc Nhà Gái</span>
+            <h3 class="event-name" id="ceremony-bride-title">Lễ Vu Quy</h3>
+          </div>
+          <div class="event-card-body">
+            <div class="event-info-row">
+              <div class="event-info-icon"><i class="fa-solid fa-clock"></i></div>
+              <div class="event-info-text">
+                <strong>Thời Gian Tổ Chức</strong>
+                <span id="ceremony-bride-time">09:00 - Thứ Sáu, Ngày 19/11/2026</span>
+              </div>
+            </div>
+
+            <div class="event-info-row">
+              <div class="event-info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+              <div class="event-info-text">
+                <strong id="ceremony-bride-venue">Tư Gia Nhà Gái</strong>
+                <span id="ceremony-bride-address">Số 68 Phố Huế, Hai Bà Trưng, Hà Nội</span>
+              </div>
+            </div>
+
+            <!-- Embedded Google Map -->
+            <div class="event-map-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.397087611796!2d105.85055047604473!3d21.01689258783424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab8bf97825b1%3A0xf693050906beba52!2zNjggUC4gSHXhur8sIEjDoG5nIELDoGksIEhhaSBCw6AgVHLGsG5nLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Bản đồ Tiệc Nhà Gái">
+              </iframe>
+            </div>
+
+            <div class="event-actions">
+              <a href="https://maps.google.com/?q=68+Pho+Hue+Hai+Ba+Trung+Ha+Noi" target="_blank" class="btn-direction" id="ceremony-bride-map-link">
+                <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+              </a>
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+Vu+Quy+Mai+Chi+%26+M%E1%BA%A1nh+D%C5%A9ng&dates=20261119T020000Z/20261119T060000Z&location=68+Pho+Hue+Hai+Ba+Trung+Ha+Noi" target="_blank" class="btn-calendar" title="Thêm vào Google Calendar">
+                <i class="fa-solid fa-calendar-plus"></i> Lưu Lịch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. WEDDING PHOTO ALBUM GALLERY SECTION
+         ======================================================================== -->
+    <section class="gallery-section">
+      <div class="section-heading">
+        <span class="section-tag"><i class="fa-solid fa-images"></i> Album Kỷ Niệm</span>
+        <h2 class="section-title">Khoảnh Khắc Yêu Thương</h2>
+        <p class="section-subtitle">Chạm vào từng bức ảnh để chiêm ngưỡng album cưới ở chế độ toàn màn hình.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/images/wedding-hero.jpg" alt="Lễ thành hôn dưới vòm hoa">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/wedding-walk.jpg" alt="Khoảnh khắc dạo bước vườn hồng">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/wedding-rings.jpg" alt="Cặp nhẫn cưới kim cương vàng kim">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/groom.jpg" alt="Chú rể Mạnh Dũng">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/bride.jpg" alt="Cô dâu Mai Chi">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/wedding-hero.jpg" alt="Trọn vẹn hạnh phúc">
+          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. RSVP - XÁC NHẬN THAM DỰ & GUESTBOOK WISHES
+         ======================================================================== -->
+    <section class="rsvp-section" id="rsvp-section">
+      <div class="section-heading">
+        <span class="section-tag"><i class="fa-solid fa-envelope-circle-check"></i> Xác Nhận Tham Dự</span>
+        <h2 class="section-title">Bạn Sẽ Đến Chung Vui Chứ?</h2>
+        <p class="section-subtitle">Để giúp dâu rể chuẩn bị đón tiếp chu đáo nhất, xin vui lòng phản hồi trước ngày 10/11/2026.</p>
+      </div>
+
+      <div class="rsvp-wrapper">
+        <form id="rsvp-form">
+          <div class="rsvp-form-grid">
+            <div class="form-group form-group-full">
+              <label for="rsvp-name"><i class="fa-solid fa-user" style="color:var(--ruby-primary);"></i> Họ và tên của bạn:</label>
+              <input type="text" id="rsvp-name" class="form-control" placeholder="Ví dụ: Anh Nam &amp; Chị Lan..." required>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label><i class="fa-solid fa-users" style="color:var(--ruby-primary);"></i> Bạn là khách mời của ai?</label>
+              <div style="display:flex; gap:20px; margin-top:6px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:normal; color:var(--text-main);">
+                  <input type="radio" name="rsvp-side" value="Nhà Trai" id="side-groom" checked> Bạn Nhà Trai
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:normal; color:var(--text-main);">
+                  <input type="radio" name="rsvp-side" value="Nhà Gái" id="side-bride"> Bạn Nhà Gái
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label><i class="fa-solid fa-circle-question" style="color:var(--ruby-primary);"></i> Xác nhận tham dự:</label>
+              <div class="attendance-options">
+                <label class="attendance-card">
+                  <input type="radio" name="rsvp-attending" value="yes" checked>
+                  <div class="attendance-pill">
+                    <i class="fa-solid fa-circle-check" style="color:#2e7d32;"></i>
+                    <span>Chắc chắn sẽ tham dự</span>
+                  </div>
+                </label>
+                <label class="attendance-card">
+                  <input type="radio" name="rsvp-attending" value="no">
+                  <div class="attendance-pill">
+                    <i class="fa-solid fa-circle-xmark" style="color:#c62828;"></i>
+                    <span>Rất tiếc không thể đến</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-count"><i class="fa-solid fa-user-group" style="color:var(--ruby-primary);"></i> Số người tham dự:</label>
+              <select id="rsvp-count" class="form-control">
+                <option value="1">Đi 1 mình</option>
+                <option value="2" selected>Đi 2 người</option>
+                <option value="3">Cả gia đình (3 người)</option>
+                <option value="4">Cả gia đình (4+ người)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-message"><i class="fa-solid fa-pen-nib" style="color:var(--ruby-primary);"></i> Lời chúc phúc gửi dâu rể:</label>
+              <input type="text" id="rsvp-message" class="form-control" placeholder="Gửi lời chúc yêu thương đến dâu rể...">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-rsvp">
+            <i class="fa-solid fa-paper-plane"></i> Gửi Xác Nhận &amp; Lời Chúc Phúc
+          </button>
+        </form>
+
+        <!-- Guestbook Wishes Stream -->
+        <div class="wishes-stream">
+          <div class="wishes-stream-title">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>Sổ Lưu Bút Chúc Mừng</span>
+          </div>
+          <div class="wishes-list" id="wishes-list">
+            <!-- Populated dynamically by rsvp.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. ONLINE WEDDING GIFT BOX (HỘP MỪNG CƯỚI VIETQR)
+         ======================================================================== -->
+    <section class="gift-section">
+      <div class="section-heading">
+        <span class="section-tag"><i class="fa-solid fa-gift"></i> Hộp Mừng Cưới</span>
+        <h2 class="section-title">Gửi Quà Mừng &amp; Phong Bì Online</h2>
+        <p class="section-subtitle">Dành cho những người bạn ở phương xa muốn gửi gắm lời chúc và phong bì mừng cưới đến đôi uyên ương.</p>
+      </div>
+
+      <button type="button" class="btn-open-gift" id="btn-show-gift">
+        <i class="fa-solid fa-hand-holding-heart fa-bounce"></i>
+        <span>Mở Hộp Mừng Cưới / Quét Mã VietQR</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL: VIETQR BANK TRANSFER POPUP
+       ======================================================================== -->
+  <div class="modal-overlay" id="gift-modal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="btn-close-gift" title="Đóng">&times;</button>
+      
+      <div style="text-align:center; margin-bottom:20px;">
+        <span class="section-tag"><i class="fa-solid fa-heart"></i> Mừng Cưới Online</span>
+        <h3 style="font-family:var(--font-serif); font-size:1.6rem; color:var(--ruby-primary);">Hộp Mừng Cưới Hạnh Phúc</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;">Quét mã VietQR bằng ứng dụng ngân hàng bất kỳ để mừng cưới nhanh chóng</p>
+      </div>
+
+      <div class="qr-boxes-grid">
+        <!-- Groom Bank Box -->
+        <div class="qr-box">
+          <strong style="color:var(--ruby-primary); font-size:1.05rem;">Mừng Chú Rể</strong>
+          <img src="" alt="Mã QR Chú Rể" class="qr-img" id="qr-img-groom">
+          <div style="font-size:0.85rem; font-weight:700; color:var(--text-main);" id="groom-bank-info">MB Bank - 0988123456</div>
+          <button class="tool-btn" style="width:auto; height:32px; padding:0 12px; font-size:0.75rem; border-radius:15px; margin-top:8px;" onclick="WeddingAdmin.copyText('0988123456', 'Đã chép số tài khoản chú rể!')">
+            <i class="fa-solid fa-copy"></i> Chép STK
+          </button>
+        </div>
+
+        <!-- Bride Bank Box -->
+        <div class="qr-box">
+          <strong style="color:var(--ruby-primary); font-size:1.05rem;">Mừng Cô Dâu</strong>
+          <img src="" alt="Mã QR Cô Dâu" class="qr-img" id="qr-img-bride">
+          <div style="font-size:0.85rem; font-weight:700; color:var(--text-main);" id="bride-bank-info">Techcombank - 1903678910</div>
+          <button class="tool-btn" style="width:auto; height:32px; padding:0 12px; font-size:0.75rem; border-radius:15px; margin-top:8px;" onclick="WeddingAdmin.copyText('1903678910', 'Đã chép số tài khoản cô dâu!')">
+            <i class="fa-solid fa-copy"></i> Chép STK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: FULLSCREEN PHOTO LIGHTBOX
+       ======================================================================== -->
+  <div class="lightbox-overlay" id="lightbox-modal">
+    <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="WeddingGallery.prev()" title="Ảnh trước">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <img src="" alt="Ảnh cưới phóng to" class="lightbox-img" id="lightbox-image">
+    <button type="button" class="lightbox-nav-btn lightbox-next" onclick="WeddingGallery.next()" title="Ảnh tiếp theo">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- ========================================================================
+       FLOATING MUSIC PLAYER DOCK
+       ======================================================================== -->
+  <aside class="music-dock" id="music-dock">
+    <div class="vinyl-disc" id="vinyl-disc" onclick="WeddingAudio.toggle()" title="Bấm phát/dừng nhạc">
+      <i class="fa-solid fa-compact-disc"></i>
+    </div>
+    <div class="dock-info">
+      <div class="dock-song-title" id="dock-song-title">Until I Found You (Romantic Piano)</div>
+      <div style="font-size:0.72rem; color:var(--text-muted);">Giai điệu tình yêu</div>
+    </div>
+    <div class="dock-controls">
+      <button type="button" class="dock-ctrl-btn" onclick="WeddingAudio.prev()" title="Bài trước">
+        <i class="fa-solid fa-backward-step"></i>
+      </button>
+      <button type="button" class="dock-ctrl-btn" onclick="WeddingAudio.toggle()" title="Phát/Dừng">
+        <i class="fa-solid fa-play" id="dock-play-icon"></i>
+      </button>
+      <button type="button" class="dock-ctrl-btn" onclick="WeddingAudio.next()" title="Bài tiếp">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Global Toast Notification -->
+  <div class="toast-msg" id="toast-notification">
+    <i class="fa-solid fa-circle-check" style="color:var(--gold-primary);"></i>
+    <span>Thông báo</span>
+  </div>
+
+  <!-- Hidden Audio Player -->
+  <audio id="main-audio" preload="auto"></audio>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--ruby-primary);">
+        <i class="fa-solid fa-rings-wedding" style="color:var(--gold-primary);"></i>
+        <span>Mạnh Dũng &amp; Mai Chi • Trọn Vẹn Hạnh Phúc</span>
+      </div>
+      <p>
+        Thiết kế bởi <a href="https://github.com/Dungautomation-dev" target="_blank" rel="noopener noreferrer">Dung Automation</a>. Mã nguồn mở phát hành theo giấy phép <a href="LICENSE" target="_blank">MIT License</a>.
+      </p>
+      <div style="margin-top:4px;">
+        <a href="admin.html" style="font-size:0.85rem; color:var(--ruby-primary);"><i class="fa-solid fa-gear"></i> Trang Tạo Link Hàng Loạt &amp; Thống Kê RSVP</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts in dependency order -->
+  <script src="assets/js/hearts.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/gallery.js"></script>
+  <script src="assets/js/rsvp.js"></script>
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

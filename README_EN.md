@@ -1,0 +1,125 @@
+# 💍 Online Wedding Invitation - Luxury Interactive E-Card ✨👰🤵
+
+<p align="center">
+  <a href="README.md"><b>🇻🇳 Tiếng Việt</b></a> &nbsp;|&nbsp; 
+  <a href="README_EN.md"><b>🇺🇸 English</b></a>
+</p>
+
+<p align="center">
+  <a href="https://dungautomation-dev.github.io/thiepcuoionline/"><img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-00e5ff?style=for-the-badge&logo=githubpages&logoColor=black" alt="Live Demo"></a>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Responsive-Mobile%20%26%20Desktop-success?style=for-the-badge" alt="Responsive">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  🌐 <strong>Experience the live interactive wedding invitation at:</strong><br>
+  👉 <a href="https://dungautomation-dev.github.io/thiepcuoionline/"><strong>https://dungautomation-dev.github.io/thiepcuoionline/</strong></a>
+</p>
+
+<p align="center">
+  👑 <strong>Admin Dashboard (Batch Guest Link Generator & RSVP Analytics):</strong><br>
+  👉 <a href="https://dungautomation-dev.github.io/thiepcuoionline/admin.html"><strong>https://dungautomation-dev.github.io/thiepcuoionline/admin.html</strong></a>
+</p>
+
+<p align="center">
+  <strong>A modern, luxury interactive digital wedding invitation website — 3D wax seal envelope unboxing, personalized guest links, 60fps floating hearts canvas physics, Google Maps directions, RSVP attendance confirmation, and an Admin dashboard for automated batch link generation! 💖🥂</strong>
+</p>
+
+---
+
+## 🌟 Overview
+
+**Online Wedding Invitation** is a high-end, responsive web application engineered purely using **HTML5 Canvas, CSS3 Glassmorphism, and Vanilla JavaScript** (100% Native, zero external heavy dependencies, ultra-lightweight and lightning fast even on mobile networks).
+
+Crafted with a **Mobile-First** design approach, it delivers an emotional and captivating experience when guests open the invitation on their smartphones via Zalo, WhatsApp, iMessage, Messenger, or QR code scans.
+
+---
+
+## ✨ Key Features
+
+### 1. 💌 3D Wax Seal Envelope Unboxing Experience
+* Opens with an ivory luxury envelope featuring an embossed golden wax seal stamp.
+* Displays personalized guest honorifics: *"Cordially invites: [Guest Name]"*.
+* Tapping **"Open Invitation"**:
+  * Triggers an interactive burst of glittering floating heart particles.
+  * Plays romantic background wedding melodies seamlessly bypassing browser autoplay restrictions.
+  * Unfolds envelope flaps and smoothly reveals the wedding ceremony details.
+
+### 2. 🏷️ Dynamic URL-Based Guest Personalization (`?to=...`)
+* Supports direct guest name injection via URL parameters:
+  * `?to=John%20%26%20Sarah`
+  * `?to=Mr.%20David%20Smith&side=groom`
+* Synchronizes across the envelope, hero banner, and pre-populates the RSVP form automatically.
+
+### 3. 👰🤵 Bride & Groom Profiles & Fullscreen Wedding Gallery
+* Portraits of the bride and groom with family lineage and contact links.
+* **Live Countdown Timer**: Tracks remaining days, hours, minutes, and seconds until the ceremony.
+* **Photo Gallery Lightbox**: Fullscreen viewer supporting keyboard arrow keys and touch navigation.
+
+### 4. 💖 Floating Hearts Canvas Physics & Tap Bursts
+* 60fps HTML5 Canvas physics engine generating floating hearts in champagne gold, ruby wine, and blush rose.
+* Interactive tap/click particle burst effect anywhere on screen.
+
+### 5. 🗺️ Venue Locations & Integrated Google Maps
+* Dedicated sections for Groom's Reception (Lễ Thành Hôn) and Bride's Ceremony (Lễ Vu Quy).
+* Embedded Google Maps for instant venue viewing.
+* Direct **"Google Maps Directions"** button opening native navigation apps on mobile.
+* **"Add to Google Calendar"** button for 1-click event reminders.
+
+### 6. 📝 RSVP Attendance Confirmation & Live Guestbook
+* Guests submit their attendance status (Attending / Unable to attend), companion count, and heartfelt wishes.
+* **Live Guestbook**: Appends greetings and wishes dynamically to the guestbook stream.
+
+### 7. 🎁 Digital Gift Box & QR Code Transfer
+* Integrated VietQR bank transfer codes for guests wishing to send congratulatory gifts from afar.
+
+### 8. 👑 Admin Dashboard & Batch Link Generator
+Access via [admin.html](admin.html) or the **Admin** button on the top toolbar:
+* **Batch Link Generation**: Paste a list of 50 to 500 guest names $\rightarrow$ automatically generates individual personalized links with pre-written messaging for WhatsApp/Zalo/SMS.
+* **RSVP Headcount Analytics**: Calculates total confirmed guests and exact headcounts for catering reservations.
+* **Export to CSV/Excel**: Export guest lists and RSVP responses in 1-click.
+* **Live Wedding Config Editor**: Edit couple names, ceremony dates, venues, and banking details directly.
+
+---
+
+## 📂 Project Architecture
+
+```
+thiepcuoionline/
+├── assets/
+│   ├── css/
+│   │   └── style.css            # Luxury wedding styles, animations, responsive design
+│   ├── js/
+│   │   ├── hearts.js            # Floating hearts canvas physics & burst particles
+│   │   ├── audio.js             # Vinyl dock controller & playlist
+│   │   ├── gallery.js           # Fullscreen photo lightbox viewer
+│   │   ├── rsvp.js              # RSVP submissions & guestbook wishes
+│   │   ├── admin.js             # Batch link generator & RSVP analytics
+│   │   └── app.js               # Application coordinator, envelope opener, countdown
+│   ├── images/
+│   │   ├── wedding-hero.jpg     # Wedding arch ceremony photo
+│   │   ├── groom.jpg            # Groom portrait
+│   │   ├── bride.jpg            # Bride portrait
+│   │   ├── wedding-rings.jpg    # Gold diamond rings
+│   │   └── wedding-walk.jpg     # Couple rose garden walk
+│   └── audio/
+│       ├── wedding-melody-1.mp3 # Until I Found You (Piano)
+│       ├── wedding-melody-2.mp3 # A Thousand Years (Strings)
+│       └── wedding-melody-3.mp3 # Canon in D (Orchestral)
+├── index.html                   # Main Wedding Invitation web app
+├── admin.html                   # Admin Dashboard & Batch Generator
+├── LICENSE                      # MIT Open Source License
+├── README.md                    # Vietnamese Documentation
+└── README_EN.md                 # English Documentation
+```
+
+---
+
+## 📄 License
+
+Released under the **[MIT License](LICENSE)**. Free to use, adapt, and customize for personal or commercial wedding celebrations.
+
+Crafted with ❤️ by **[Dung Automation](https://github.com/Dungautomation-dev)**.
