@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   initURLParams();
   initCountdown();
   initWeddingData();
@@ -12,14 +13,49 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. Guest Name & URL Parameter Personalization
+   0. Theme Initialization
+   -------------------------------------------------------------------------- */
+function initTheme() {
+  if (!window.WeddingAdmin) return;
+  const cfg = window.WeddingAdmin.getConfig();
+  if (cfg.theme) {
+    document.body.setAttribute('data-theme', cfg.theme);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1. Guest Name & URL Parameter Personalization (Rút Gọn Slug)
    -------------------------------------------------------------------------- */
 function initURLParams() {
   const urlParams = new URLSearchParams(window.location.search);
   const guestParam = urlParams.get('to') || urlParams.get('guest');
-  const sideParam = urlParams.get('side'); // 'groom' or 'bride'
+  const sideParam = urlParams.get('side');
 
-  const guestName = guestParam ? decodeURIComponent(guestParam) : 'Quý Khách & Gia Đình';
+  let guestName = 'Quý Khách & Gia Đình';
+
+  if (guestParam) {
+    const rawTo = guestParam.trim();
+    const cfg = window.WeddingAdmin ? window.WeddingAdmin.getConfig() : null;
+
+    // 1. Check if slug exists in Admin guest mapping dictionary
+    if (cfg && cfg.guestMap && cfg.guestMap[rawTo]) {
+      guestName = cfg.guestMap[rawTo];
+    } 
+    // 2. If it's a hyphenated slug (e.g., ?to=anh-nam-va-gia-dinh)
+    else if (rawTo.includes('-')) {
+      const words = rawTo.split('-').filter(w => w.length > 0);
+      const titleCased = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      guestName = 'Kính mời: ' + titleCased;
+    }
+    // 3. If it's a compact slug (e.g., ?to=tenkhachhang)
+    else if (/^[a-z0-9]+$/i.test(rawTo) && rawTo.length > 1) {
+      guestName = 'Kính mời: ' + rawTo.charAt(0).toUpperCase() + rawTo.slice(1);
+    }
+    // 4. Default decoded string
+    else {
+      guestName = decodeURIComponent(rawTo);
+    }
+  }
 
   // Update Envelope Guest Name
   const envelopeGuestEl = document.getElementById('envelope-guest-name');
@@ -36,8 +72,7 @@ function initURLParams() {
   // Pre-fill RSVP Name Input
   const rsvpNameInput = document.getElementById('rsvp-name');
   if (rsvpNameInput && guestParam) {
-    // Strip default "Kính mời: " prefix if present for clean form input
-    const cleanName = guestName.replace(/^(Trân trọng kính mời|Kính mời|Thân mời):?\s*/i, '');
+    const cleanName = guestName.replace(/^(Trân trọng kính mời|Kính mời|Thân mời|Mời bạn):?\s*/i, '');
     rsvpNameInput.value = cleanName;
   }
 
@@ -63,20 +98,15 @@ function initEnvelopeOpener() {
   if (!openBtn || !envelopeOverlay) return;
 
   openBtn.addEventListener('click', () => {
-    // Trigger celebration heart burst
     if (window.triggerHeartBurst) {
       window.triggerHeartBurst(window.innerWidth / 2, window.innerHeight * 0.45, 40);
     }
 
-    // Play wedding background melody
     if (window.WeddingAudio && typeof window.WeddingAudio.play === 'function') {
       window.WeddingAudio.play();
     }
 
-    // Slide away envelope
     envelopeOverlay.classList.add('opened');
-
-    // Smooth scroll to top of card
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
@@ -124,7 +154,7 @@ function initCountdown() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Sync Wedding Details From Configuration
+   4. Sync Wedding Details & Customized Images
    -------------------------------------------------------------------------- */
 function initWeddingData() {
   if (!window.WeddingAdmin) return;
@@ -139,6 +169,15 @@ function initWeddingData() {
   const envelopeCoupleEl = document.getElementById('envelope-couple-names');
   if (envelopeCoupleEl) {
     envelopeCoupleEl.textContent = `${cfg.groom.name} & ${cfg.bride.name}`;
+  }
+
+  // Populate Customized Photos if configured
+  if (cfg.images) {
+    setImgSrc('hero-photo-img', cfg.images.hero);
+    setImgSrc('groom-avatar-img', cfg.images.groom);
+    setImgSrc('bride-avatar-img', cfg.images.bride);
+    setImgSrc('rings-photo-img', cfg.images.rings);
+    setImgSrc('walk-photo-img', cfg.images.walk);
   }
 
   // Populate Groom Info
@@ -176,6 +215,12 @@ function initWeddingData() {
     const cleanBank = cfg.bride.bankName.split(' ')[0].toLowerCase();
     qrBride.src = `https://img.vietqr.io/image/${cleanBank}-${cfg.bride.bankNumber}-compact2.jpg?amount=0&addInfo=Mung%20Cuoi%20${encodeURIComponent(cfg.bride.name)}&accountName=${encodeURIComponent(cfg.bride.bankAccountName)}`;
   }
+}
+
+function setImgSrc(id, src) {
+  if (!src) return;
+  const el = document.getElementById(id);
+  if (el) el.src = src;
 }
 
 function setText(id, text) {

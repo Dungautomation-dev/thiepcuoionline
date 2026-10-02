@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Quản Trị - Tạo Link Thiệp Cưới &amp; Thống Kê RSVP</title>
-  <meta name="description" content="Trang quản trị thiệp cưới online: Nhập danh sách khách mời để tự động sinh link hàng loạt và thống kê xác nhận tham dự.">
+  <title>Admin Quản Trị - Tạo Link Thiệp Cưới &amp; Cài Đặt Giao Diện</title>
+  <meta name="description" content="Trang quản trị thiệp cưới online: Rút gọn link khách mời hàng loạt, 10 template mẫu cưới, tùy chỉnh ảnh cưới và thống kê RSVP.">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/images/wedding-rings.jpg" type="image/jpeg">
@@ -27,22 +27,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       padding-bottom: 20px;
       border-bottom: 1px solid var(--border-gold);
+      flex-wrap: wrap;
+      gap: 15px;
     }
     .admin-tabs {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 30px;
       flex-wrap: wrap;
     }
     .admin-tab-btn {
-      padding: 12px 24px;
+      padding: 11px 20px;
       border-radius: 30px;
       border: 1px solid var(--border-gold);
       background: #fff;
       font-weight: 700;
+      font-size: 0.88rem;
       color: var(--text-main);
       cursor: pointer;
       display: flex;
@@ -136,7 +139,7 @@
           Bảng Điều Khiển Quản Trị Thiệp Cưới
         </h1>
         <p style="font-size:0.88rem; color:var(--text-muted);">
-          Tạo link thiệp mời cá nhân hóa hàng loạt &amp; Thống kê xác nhận tham dự (RSVP)
+          Rút gọn link mời hàng loạt, 10 template mẫu cưới, tùy chỉnh ảnh và thống kê RSVP
         </p>
       </div>
       <div style="display:flex; gap:10px;">
@@ -153,15 +156,23 @@
     <nav class="admin-tabs" aria-label="Admin Navigation Tabs">
       <button class="admin-tab-btn active" onclick="switchAdminTab('tab-batch')">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <span>1. Tạo Link Thiệp Hàng Loạt</span>
+        <span>1. Tạo Link Khách Hàng Loạt</span>
+      </button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('tab-theme')">
+        <i class="fa-solid fa-palette"></i>
+        <span>2. Chọn Mẫu Thiệp (10 Template)</span>
+      </button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('tab-images')">
+        <i class="fa-solid fa-images"></i>
+        <span>3. Tùy Chỉnh Hình Ảnh Cưới</span>
       </button>
       <button class="admin-tab-btn" onclick="switchAdminTab('tab-rsvp')">
         <i class="fa-solid fa-users-viewfinder"></i>
-        <span>2. Thống Kê Phản Hồi (RSVP)</span>
+        <span>4. Thống Kê Phản Hồi (RSVP)</span>
       </button>
       <button class="admin-tab-btn" onclick="switchAdminTab('tab-config')">
         <i class="fa-solid fa-sliders"></i>
-        <span>3. Tùy Chỉnh Thông Tin Hôn Lễ</span>
+        <span>5. Thông Tin Hôn Lễ</span>
       </button>
     </nav>
 
@@ -172,14 +183,23 @@
       <div style="margin-bottom:20px;">
         <h2 style="font-family:var(--font-serif); font-size:1.4rem; color:var(--ruby-primary);">
           <i class="fa-solid fa-list-check" style="color:var(--gold-primary); margin-right:8px;"></i>
-          Nhập Danh Sách Khách Mời
+          Nhập Danh Sách Khách Mời &amp; Rút Gọn Link
         </h2>
         <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
-          Dán danh sách tên bạn bè, người thân vào ô bên dưới (mỗi người 1 dòng). Hệ thống sẽ tự động sinh link thiệp mời riêng biệt cho từng người kèm tin nhắn Zalo/SMS!
+          Dán danh sách tên bạn bè, người thân vào ô bên dưới (mỗi người 1 dòng). Link sẽ được rút gọn cực đẹp (ví dụ <code>?to=anhnam</code> hoặc <code>?to=tenkhachhang</code>) mà vẫn hiển thị đầy đủ dấu tiếng Việt trên thiệp!
         </p>
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:18px; margin-bottom:18px;">
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom:18px;">
+        <div class="form-group">
+          <label for="admin-slug-mode"><i class="fa-solid fa-link"></i> Kiểu đuôi link mời:</label>
+          <select id="admin-slug-mode" class="form-control">
+            <option value="compact" selected>⚡ Rút gọn không dấu (?to=tenkhachhang)</option>
+            <option value="hyphen">🔗 Gọn có gạch nối (?to=ten-khach-hang)</option>
+            <option value="standard">🔤 Giữ nguyên có dấu (?to=Tên%20Khách)</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="admin-prefix"><i class="fa-solid fa-tag"></i> Cách xưng hô mặc định:</label>
           <select id="admin-prefix" class="form-control">
@@ -203,7 +223,7 @@
 
       <div class="form-group" style="margin-bottom:20px;">
         <label for="admin-guest-input"><i class="fa-solid fa-align-left"></i> Danh sách khách mời (Mỗi người 1 dòng):</label>
-        <textarea id="admin-guest-input" class="form-control" rows="8" placeholder="Ví dụ:
+        <textarea id="admin-guest-input" class="form-control" rows="7" placeholder="Ví dụ:
 Anh Nam &amp; Chị Lan
 Bạn Hoàng Dũng (Cấp 3)
 Bác Hùng &amp; Gia Đình
@@ -230,8 +250,8 @@ Chú Ba và Gia Đình"></textarea>
             <thead>
               <tr>
                 <th style="width:25%;">Khách Mời</th>
-                <th style="width:15%;">Phía</th>
-                <th style="width:40%;">Link Thiệp Mời Cá Nhân Hóa</th>
+                <th style="width:14%;">Phía</th>
+                <th style="width:41%;">Link Thiệp Mời Rút Gọn</th>
                 <th style="width:20%;">Thao Tác Nhanh</th>
               </tr>
             </thead>
@@ -248,7 +268,47 @@ Chú Ba và Gia Đình"></textarea>
     </section>
 
     <!-- ========================================================================
-         TAB 2: THỐNG KÊ PHẢN HỒI (RSVP ATTENDANCE DASHBOARD)
+         TAB 2: CHỌN MẪU THIỆP CƯỚI (10 WEDDING TEMPLATES)
+         ======================================================================== -->
+    <section id="tab-theme" class="admin-section">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-serif); font-size:1.4rem; color:var(--ruby-primary);">
+          <i class="fa-solid fa-palette" style="color:var(--gold-primary); margin-right:8px;"></i>
+          Bộ Sưu Tập 10 Mẫu Thiệp Cưới Cao Cấp
+        </h2>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
+          Lựa chọn tông màu và phong cách thiệp cưới phù hợp với ngày vui của bạn. Bấm vào mẫu bất kỳ để xem trước và áp dụng ngay!
+        </p>
+      </div>
+
+      <!-- 10 Theme Preview Cards Grid -->
+      <div class="theme-selector-grid" id="admin-theme-selector">
+        <!-- Rendered dynamically by admin.js -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         TAB 3: TÙY CHỈNH HÌNH ẢNH CƯỚI (IMAGE CUSTOMIZER)
+         ======================================================================== -->
+    <section id="tab-images" class="admin-section">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-serif); font-size:1.4rem; color:var(--ruby-primary);">
+          <i class="fa-solid fa-images" style="color:var(--gold-primary); margin-right:8px;"></i>
+          Tùy Chỉnh Hình Ảnh Cưới Của Riêng Bạn
+        </h2>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
+          Tải ảnh thực tế của cô dâu chú rể từ điện thoại/máy tính hoặc dán link ảnh online (Imgur, Facebook, Cloudinary...). Có khung xem trước tức thì!
+        </p>
+      </div>
+
+      <!-- Image Customizer Grid -->
+      <div class="image-manager-grid" id="admin-images-grid">
+        <!-- Rendered dynamically by admin.js -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         TAB 4: THỐNG KÊ PHẢN HỒI (RSVP ATTENDANCE DASHBOARD)
          ======================================================================== -->
     <section id="tab-rsvp" class="admin-section">
       <div style="margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
@@ -307,7 +367,7 @@ Chú Ba và Gia Đình"></textarea>
     </section>
 
     <!-- ========================================================================
-         TAB 3: TÙY CHỈNH THÔNG TIN HÔN LỄ (WEDDING CONFIG EDITOR)
+         TAB 5: TÙY CHỈNH THÔNG TIN HÔN LỄ (WEDDING CONFIG EDITOR)
          ======================================================================== -->
     <section id="tab-config" class="admin-section">
       <div style="margin-bottom:25px;">
@@ -327,19 +387,19 @@ Chú Ba và Gia Đình"></textarea>
         <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
           <div class="form-group">
             <label for="cfg-groom-name">Tên gọi thân mật:</label>
-            <input type="text" id="cfg-groom-name" class="form-control" required>
+            <input type="text" id="cfg-groom-name" class="form-control" placeholder="Tên Chú Rể" required>
           </div>
           <div class="form-group">
             <label for="cfg-groom-fullname">Họ và tên đầy đủ:</label>
-            <input type="text" id="cfg-groom-fullname" class="form-control" required>
+            <input type="text" id="cfg-groom-fullname" class="form-control" placeholder="Họ và Tên Chú Rể" required>
           </div>
           <div class="form-group">
             <label for="cfg-groom-father">Họ tên Thân Phụ (Bố):</label>
-            <input type="text" id="cfg-groom-father" class="form-control">
+            <input type="text" id="cfg-groom-father" class="form-control" placeholder="Thân Phụ Chú Rể">
           </div>
           <div class="form-group">
             <label for="cfg-groom-mother">Họ tên Thân Mẫu (Mẹ):</label>
-            <input type="text" id="cfg-groom-mother" class="form-control">
+            <input type="text" id="cfg-groom-mother" class="form-control" placeholder="Thân Mẫu Chú Rể">
           </div>
           <div class="form-group">
             <label for="cfg-groom-phone">Số điện thoại chú rể:</label>
@@ -365,19 +425,19 @@ Chú Ba và Gia Đình"></textarea>
         <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
           <div class="form-group">
             <label for="cfg-bride-name">Tên gọi thân mật:</label>
-            <input type="text" id="cfg-bride-name" class="form-control" required>
+            <input type="text" id="cfg-bride-name" class="form-control" placeholder="Tên Cô Dâu" required>
           </div>
           <div class="form-group">
             <label for="cfg-bride-fullname">Họ và tên đầy đủ:</label>
-            <input type="text" id="cfg-bride-fullname" class="form-control" required>
+            <input type="text" id="cfg-bride-fullname" class="form-control" placeholder="Họ và Tên Cô Dâu" required>
           </div>
           <div class="form-group">
             <label for="cfg-bride-father">Họ tên Thân Phụ (Bố):</label>
-            <input type="text" id="cfg-bride-father" class="form-control">
+            <input type="text" id="cfg-bride-father" class="form-control" placeholder="Thân Phụ Cô Dâu">
           </div>
           <div class="form-group">
             <label for="cfg-bride-mother">Họ tên Thân Mẫu (Mẹ):</label>
-            <input type="text" id="cfg-bride-mother" class="form-control">
+            <input type="text" id="cfg-bride-mother" class="form-control" placeholder="Thân Mẫu Cô Dâu">
           </div>
           <div class="form-group">
             <label for="cfg-bride-phone">Số điện thoại cô dâu:</label>

@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <strong>A modern, luxury interactive digital wedding invitation website — 3D wax seal envelope unboxing, personalized guest links, 60fps floating hearts canvas physics, Google Maps directions, RSVP attendance confirmation, and an Admin dashboard for automated batch link generation! 💖🥂</strong>
+  <strong>A modern, luxury interactive digital wedding invitation website — 3D wax seal envelope unboxing, compact clean slug links <code>?to=tenkhachhang</code>, 10 luxury wedding themes, photo customizer, 60fps floating hearts canvas physics, Google Maps directions, RSVP attendance confirmation, and an Admin dashboard for automated batch link generation! 💖🥂</strong>
 </p>
 
 ---
@@ -48,16 +48,33 @@ Crafted with a **Mobile-First** design approach, it delivers an emotional and ca
   * Plays romantic background wedding melodies seamlessly bypassing browser autoplay restrictions.
   * Unfolds envelope flaps and smoothly reveals the wedding ceremony details.
 
-### 2. 🏷️ Dynamic URL-Based Guest Personalization (`?to=...`)
-* Supports direct guest name injection via URL parameters:
-  * `?to=John%20%26%20Sarah`
-  * `?to=Mr.%20David%20Smith&side=groom`
-* Synchronizes across the envelope, hero banner, and pre-populates the RSVP form automatically.
+### 2. ⚡ Clean Compact Guest Links (`?to=tenkhachhang`)
+* Generates aesthetic, unaccented compact URLs:
+  * Example: `https://dungautomation-dev.github.io/thiepcuoionline/?to=anhnam` or `?to=tenkhachhang`
+  * Automatically maps slugs to full formatted names with Vietnamese accents: **"Kính mời: Anh Nam & Gia Đình"**!
+  * Supports 3 slug formats: Compact unaccented (`?to=tenkhachhang`), Hyphenated (`?to=ten-khach-hang`), and Standard encoded (`?to=Full%20Name`).
 
-### 3. 👰🤵 Bride & Groom Profiles & Fullscreen Wedding Gallery
-* Portraits of the bride and groom with family lineage and contact links.
-* **Live Countdown Timer**: Tracks remaining days, hours, minutes, and seconds until the ceremony.
-* **Photo Gallery Lightbox**: Fullscreen viewer supporting keyboard arrow keys and touch navigation.
+### 3. 🎨 10 Luxury Wedding Template Presets
+Built-in 10 themes with live preview color chips:
+1. 👑 **Champagne Gold & Ruby**: Aristocratic gold & ruby wine (Default).
+2. 🌸 **Rose Gold & Blush Pink**: Soft romantic blush & rose gold.
+3. 🌿 **Emerald & Botanical Green**: Forest emerald & eucalyptus rustic garden.
+4. 🕊️ **Classic Minimalist Black & White**: Monochrome elegance & silver borders.
+5. 🌊 **Ocean & Santorini Blue**: Aegean navy blue & golden shores.
+6. 🍷 **Burgundy & Dark Plum**: Deep Bordeaux wine & warm candle glow.
+7. 💜 **Lavender & Lilac Dream**: Dreamy lilac & everlasting lavender.
+8. 🍂 **Warm Terracotta & Sunset**: Bohemian terracotta & pampas grass.
+9. 🪷 **Royal Lotus Traditional**: Traditional scarlet red, pink lotus & gold double happiness.
+10. ✨ **Celestial Starry Night**: Midnight starry sky & golden galaxy sparkles.
+
+### 4. 🖼️ Personal Wedding Photo Customizer
+* Replace wedding photos directly inside the Admin Dashboard:
+  * Hero Arch Photo / Top Banner
+  * Groom Portrait
+  * Bride Portrait
+  * Wedding Rings & Bouquet
+  * Rose Garden Walk
+* Upload directly from device (auto-persisted) or paste any online photo URL with live thumbnail previews!
 
 ### 4. 💖 Floating Hearts Canvas Physics & Tap Bursts
 * 60fps HTML5 Canvas physics engine generating floating hearts in champagne gold, ruby wine, and blush rose.

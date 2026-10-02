@@ -6,31 +6,104 @@
 const WeddingAdmin = (function () {
   const CONFIG_KEY = 'thiepcuoi_wedding_config';
 
+  // 10 Wedding Theme Templates Catalog
+  const THEMES_CATALOG = [
+    {
+      id: 'champagne-gold',
+      name: 'Hoàng Gia Sang Trọng',
+      desc: 'Vàng Champagne quý phái & Đỏ Ruby',
+      colors: ['#d4af37', '#85142b', '#faf7f2']
+    },
+    {
+      id: 'rose-gold',
+      name: 'Hồng Pastel Lãng Mạn',
+      desc: 'Vàng Hồng Rose Gold & Hồng Phấn',
+      colors: ['#b76e79', '#ff9ebb', '#fdf5f7']
+    },
+    {
+      id: 'emerald-green',
+      name: 'Khu Vườn Cổ Tích',
+      desc: 'Xanh Ngọc Lục Bảo & Lá Cây Rustic',
+      colors: ['#1f4e38', '#528c68', '#f5f8f6']
+    },
+    {
+      id: 'classic-bw',
+      name: 'Cổ Điển Tinh Tế',
+      desc: 'Đen Trắng Tối Giản & Viền Bạc',
+      colors: ['#1a1a1a', '#8a8d91', '#fbfbfc']
+    },
+    {
+      id: 'ocean-blue',
+      name: 'Biển Xanh Santorini',
+      desc: 'Xanh Navy & Ánh Vàng Biển',
+      colors: ['#0f3b5f', '#3498db', '#f2f7fb']
+    },
+    {
+      id: 'burgundy',
+      name: 'Rượu Vang Đằm Thắm',
+      desc: 'Đỏ Bordeaux & Ánh Nến Ấm Áp',
+      colors: ['#5c0919', '#d4af37', '#fcf4f5']
+    },
+    {
+      id: 'lavender',
+      name: 'Oải Hương Mộng Mơ',
+      desc: 'Tím Lavender & Lilac Thơ Mộng',
+      colors: ['#5b2c6f', '#bb8fce', '#f9f5fb']
+    },
+    {
+      id: 'terracotta',
+      name: 'Cam Đất Hoàng Hôn',
+      desc: 'Cam Đất Bohemian & Hoa Khô Pampas',
+      colors: ['#a04000', '#d97d4a', '#fcf7f3']
+    },
+    {
+      id: 'lotus-traditional',
+      name: 'Truyền Thống Sen Hồng',
+      desc: 'Đỏ Son Truyền Thống & Chữ Hỷ Vàng',
+      colors: ['#b81d24', '#e84393', '#fff7f7']
+    },
+    {
+      id: 'starry-night',
+      name: 'Dạ Yến Ngân Hà',
+      desc: 'Bầu Trời Đêm Huyền Ảo & Ánh Sao',
+      colors: ['#ffd700', '#e0a96d', '#0c1017']
+    }
+  ];
+
   // Default Wedding Details Configuration
   const DEFAULT_CONFIG = {
+    theme: 'champagne-gold',
+    images: {
+      hero: 'assets/images/wedding-hero.jpg',
+      groom: 'assets/images/groom.jpg',
+      bride: 'assets/images/bride.jpg',
+      rings: 'assets/images/wedding-rings.jpg',
+      walk: 'assets/images/wedding-walk.jpg'
+    },
+    guestMap: {},
     groom: {
-      name: 'Mạnh Dũng',
-      fullName: 'Nguyễn Mạnh Dũng',
-      father: 'Nguyễn Văn Tuấn',
-      mother: 'Trần Thị Thu',
+      name: 'Tên Chú Rể',
+      fullName: 'Họ và Tên Chú Rể',
+      father: 'Thân Phụ Chú Rể',
+      mother: 'Thân Mẫu Chú Rể',
       phone: '0988 123 456',
       facebook: 'https://facebook.com',
       bankName: 'MB Bank (Quân Đội)',
       bankNumber: '0988123456',
-      bankAccountName: 'NGUYEN MANH DUNG'
+      bankAccountName: 'TEN CHU RE'
     },
     bride: {
-      name: 'Mai Chi',
-      fullName: 'Lê Mai Chi',
-      father: 'Lê Quang Huy',
-      mother: 'Phạm Thị Lan',
+      name: 'Tên Cô Dâu',
+      fullName: 'Họ và Tên Cô Dâu',
+      father: 'Thân Phụ Cô Dâu',
+      mother: 'Thân Mẫu Cô Dâu',
       phone: '0977 654 321',
       facebook: 'https://facebook.com',
       bankName: 'Techcombank',
       bankNumber: '1903678910',
-      bankAccountName: 'LE MAI CHI'
+      bankAccountName: 'TEN CO DAU'
     },
-    weddingDate: '2026-11-20T11:00:00', // Default date for countdown
+    weddingDate: '2026-11-20T11:00:00',
     ceremonyGroom: {
       title: 'Lễ Thành Hôn (Tiệc Nhà Trai)',
       time: '11:00 - Thứ Bảy, Ngày 20/11/2026',
@@ -51,7 +124,11 @@ const WeddingAdmin = (function () {
     try {
       const data = localStorage.getItem(CONFIG_KEY);
       if (!data) return DEFAULT_CONFIG;
-      return Object.assign({}, DEFAULT_CONFIG, JSON.parse(data));
+      const parsed = JSON.parse(data);
+      return Object.assign({}, DEFAULT_CONFIG, parsed, {
+        images: Object.assign({}, DEFAULT_CONFIG.images, parsed.images || {}),
+        guestMap: Object.assign({}, DEFAULT_CONFIG.guestMap, parsed.guestMap || {})
+      });
     } catch (e) {
       return DEFAULT_CONFIG;
     }
@@ -65,16 +142,67 @@ const WeddingAdmin = (function () {
     }
   }
 
+  /* --------------------------------------------------------------------------
+     Vietnamese Accent Removal & Slug Generation
+     -------------------------------------------------------------------------- */
+  function removeVietnameseTones(str) {
+    str = String(str || '');
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+    str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+    str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+    str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+    str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+    str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+    str = str.replace(/Đ/g, "D");
+    return str;
+  }
+
+  function slugify(text, mode = 'compact') {
+    let clean = removeVietnameseTones(text).toLowerCase();
+    clean = clean.replace(/&/g, 'va');
+    clean = clean.replace(/[^a-z0-9\s-]/g, '');
+    clean = clean.trim();
+
+    if (mode === 'compact') {
+      // ví dụ: ?to=tenkhachhang
+      return clean.replace(/\s+/g, '');
+    } else if (mode === 'hyphen') {
+      // ví dụ: ?to=ten-khach-hang
+      return clean.replace(/\s+/g, '-').replace(/-+/g, '-');
+    } else {
+      return encodeURIComponent(text);
+    }
+  }
+
   function init() {
-    // If admin elements exist on current page (admin.html or admin modal)
+    initTheme();
     initBatchGenerator();
+    initThemeSelector();
+    initImageCustomizer();
     initRSVPDashboard();
     initInfoEditor();
   }
 
+  // Apply theme to body
+  function initTheme() {
+    const cfg = getConfig();
+    if (cfg.theme) {
+      document.body.setAttribute('data-theme', cfg.theme);
+    }
+  }
+
   /* --------------------------------------------------------------------------
-     1. Batch Guest Link Generator
+     1. Batch Guest Link Generator (Rút Gọn Link ?to=tenkhachhang)
      -------------------------------------------------------------------------- */
+  let generatedLinksList = [];
+
   function initBatchGenerator() {
     const btnGen = document.getElementById('btn-generate-batch');
     if (!btnGen) return;
@@ -87,12 +215,11 @@ const WeddingAdmin = (function () {
     }
   }
 
-  let generatedLinksList = [];
-
   function generateBatchLinks() {
     const textarea = document.getElementById('admin-guest-input');
     const sideSelect = document.getElementById('admin-default-side');
     const prefixSelect = document.getElementById('admin-prefix');
+    const slugModeSelect = document.getElementById('admin-slug-mode');
     const outputContainer = document.getElementById('admin-batch-output');
     const resultsCountEl = document.getElementById('admin-batch-count');
 
@@ -108,38 +235,47 @@ const WeddingAdmin = (function () {
     const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
     const side = sideSelect ? sideSelect.value : 'groom';
     const prefix = prefixSelect ? prefixSelect.value : 'Kính mời: ';
+    const slugMode = slugModeSelect ? slugModeSelect.value : 'compact';
 
-    // Get current base URL without queries
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/admin(\.html)?$/, '/index.html').replace(/\/admin(\.html)?$/, '/');
+    const cfg = getConfig();
 
     generatedLinksList = lines.map((name, index) => {
-      const formattedName = (prefix ? prefix : '') + name;
+      const fullGreeting = (prefix ? prefix : '') + name;
+      const slug = slugify(name, slugMode);
+
+      // Save mapping in config so the invitation page knows the full beautiful name with accents!
+      cfg.guestMap[slug] = fullGreeting;
+
       const query = new URLSearchParams();
-      query.set('to', formattedName);
+      query.set('to', slug);
       if (side !== 'all') {
         query.set('side', side);
       }
       const fullUrl = `${baseUrl}?${query.toString()}`;
 
-      // Compose gentle personalized invitation message for Zalo/SMS
-      const cfg = getConfig();
-      const message = `Trân trọng gửi thiệp cưới đến ${formattedName}! 💌\n` +
-        `Mạnh Dũng & Mai Chi rất mong được đón tiếp bạn trong ngày vui trọng đại của chúng mình vào ngày ${cfg.ceremonyGroom.time}.\n\n` +
+      // Compose gentle invitation message for Zalo/SMS
+      const message = `Trân trọng gửi thiệp cưới đến ${fullGreeting}! 💌\n` +
+        `${cfg.groom.name} & ${cfg.bride.name} rất mong được đón tiếp bạn trong ngày vui trọng đại của chúng mình vào ngày ${cfg.ceremonyGroom.time}.\n\n` +
         `Xem thông tin chi tiết và thiệp cưới tại: ${fullUrl}\n\n` +
         `Sự hiện diện của bạn là niềm hạnh phúc lớn nhất của chúng mình! 💐✨`;
 
       return {
         id: index + 1,
         guestName: name,
-        fullGreeting: formattedName,
+        fullGreeting: fullGreeting,
+        slug: slug,
         side: side === 'groom' ? 'Nhà Trai' : (side === 'bride' ? 'Nhà Gái' : 'Chung'),
         url: fullUrl,
         message: message
       };
     });
 
+    // Save updated guestMap to persistent config
+    saveConfig(cfg);
+
     if (resultsCountEl) {
-      resultsCountEl.textContent = `Đã tạo thành công ${generatedLinksList.length} đường link thiệp cưới cá nhân hóa`;
+      resultsCountEl.textContent = `Đã tạo thành công ${generatedLinksList.length} đường link thiệp cưới cá nhân hóa rút gọn`;
     }
 
     renderBatchLinksTable(generatedLinksList);
@@ -184,16 +320,147 @@ const WeddingAdmin = (function () {
       return;
     }
 
-    let csvContent = '\uFEFF"STT","Khách Mời","Xưng Hô","Phía","Đường Link Thiệp Mời"\n';
+    let csvContent = '\uFEFF"STT","Khách Mời","Xưng Hô","Mã Rút Gọn","Phía","Đường Link Thiệp Mời"\n';
     generatedLinksList.forEach(item => {
-      csvContent += `"${item.id}","${item.guestName}","${item.fullGreeting}","${item.side}","${item.url}"\n`;
+      csvContent += `"${item.id}","${item.guestName}","${item.fullGreeting}","${item.slug}","${item.side}","${item.url}"\n`;
     });
 
-    downloadCSV(csvContent, 'danh_sach_link_thiep_cuoi.csv');
+    downloadCSV(csvContent, 'danh_sach_link_thiep_cuoi_rut_gon.csv');
   }
 
   /* --------------------------------------------------------------------------
-     2. RSVP Attendance Dashboard
+     2. 10 Template Switcher (Chọn Mẫu Thiệp Cưới)
+     -------------------------------------------------------------------------- */
+  function initThemeSelector() {
+    const container = document.getElementById('admin-theme-selector');
+    if (!container) return;
+
+    const cfg = getConfig();
+    const activeTheme = cfg.theme || 'champagne-gold';
+
+    container.innerHTML = THEMES_CATALOG.map(t => {
+      const isActive = t.id === activeTheme;
+      return `
+        <div class="theme-card-preview ${isActive ? 'active' : ''}" onclick="WeddingAdmin.applyTheme('${t.id}')">
+          <div class="theme-active-tag"><i class="fa-solid fa-check"></i> Đang chọn</div>
+          <div class="theme-chips-row">
+            ${t.colors.map(c => `<span class="theme-color-chip" style="background:${c};"></span>`).join('')}
+          </div>
+          <div class="theme-preview-name">${t.name}</div>
+          <div class="theme-preview-desc">${t.desc}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function applyTheme(themeId) {
+    const cfg = getConfig();
+    cfg.theme = themeId;
+    saveConfig(cfg);
+
+    document.body.setAttribute('data-theme', themeId);
+    initThemeSelector();
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast('🎨 Đã áp dụng mẫu giao diện mới!');
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     3. Image Customizer (Tùy Chỉnh Hình Ảnh Cưới)
+     -------------------------------------------------------------------------- */
+  const IMAGE_SLOTS = [
+    { key: 'hero', title: 'Ảnh Cổng Hoa / Banner Đầu Trang', defaultSrc: 'assets/images/wedding-hero.jpg' },
+    { key: 'groom', title: 'Ảnh Chân Dung Chú Rể', defaultSrc: 'assets/images/groom.jpg' },
+    { key: 'bride', title: 'Ảnh Chân Dung Cô Dâu', defaultSrc: 'assets/images/bride.jpg' },
+    { key: 'rings', title: 'Ảnh Nhẫn Cưới & Hoa Hồng', defaultSrc: 'assets/images/wedding-rings.jpg' },
+    { key: 'walk', title: 'Ảnh Dạo Bước Vườn Hồng', defaultSrc: 'assets/images/wedding-walk.jpg' }
+  ];
+
+  function initImageCustomizer() {
+    const container = document.getElementById('admin-images-grid');
+    if (!container) return;
+
+    const cfg = getConfig();
+
+    container.innerHTML = IMAGE_SLOTS.map(slot => {
+      const currentSrc = (cfg.images && cfg.images[slot.key]) ? cfg.images[slot.key] : slot.defaultSrc;
+      return `
+        <div class="image-custom-card">
+          <div class="image-custom-title">
+            <i class="fa-solid fa-image"></i> ${slot.title}
+          </div>
+          <div class="image-preview-thumbnail" id="preview-box-${slot.key}">
+            <img src="${currentSrc}" alt="${slot.title}" id="img-preview-${slot.key}">
+          </div>
+          <div class="image-custom-actions">
+            <label class="btn-upload-label">
+              <i class="fa-solid fa-upload"></i> Tải ảnh từ máy tính/điện thoại
+              <input type="file" accept="image/*" onchange="WeddingAdmin.handleImageUpload('${slot.key}', this)">
+            </label>
+            <input type="url" class="form-control" placeholder="Hoặc dán URL ảnh online..." value="${currentSrc.startsWith('data:') ? '' : currentSrc}" onchange="WeddingAdmin.handleImageUrl('${slot.key}', this.value)" style="font-size:0.8rem; padding:6px 10px;">
+            <button type="button" class="tool-btn" style="width:100%; height:32px; font-size:0.75rem; border-radius:8px;" onclick="WeddingAdmin.resetImage('${slot.key}')">
+              <i class="fa-solid fa-rotate-left"></i> Đặt lại ảnh mặc định
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function handleImageUpload(key, inputEl) {
+    if (!inputEl.files || !inputEl.files[0]) return;
+    const file = inputEl.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const base64 = e.target.result;
+      const cfg = getConfig();
+      cfg.images[key] = base64;
+      saveConfig(cfg);
+
+      const imgEl = document.getElementById(`img-preview-${key}`);
+      if (imgEl) imgEl.src = base64;
+
+      if (WeddingRSVP.showToast) {
+        WeddingRSVP.showToast('🖼️ Đã cập nhật ảnh thành công!');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleImageUrl(key, url) {
+    url = url.trim();
+    if (!url) return;
+    const cfg = getConfig();
+    cfg.images[key] = url;
+    saveConfig(cfg);
+
+    const imgEl = document.getElementById(`img-preview-${key}`);
+    if (imgEl) imgEl.src = url;
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast('🖼️ Đã lưu URL ảnh mới!');
+    }
+  }
+
+  function resetImage(key) {
+    const slot = IMAGE_SLOTS.find(s => s.key === key);
+    if (!slot) return;
+    const cfg = getConfig();
+    cfg.images[key] = slot.defaultSrc;
+    saveConfig(cfg);
+
+    const imgEl = document.getElementById(`img-preview-${key}`);
+    if (imgEl) imgEl.src = slot.defaultSrc;
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast('🔄 Đã đặt lại ảnh mẫu ban đầu!');
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     4. RSVP Attendance Dashboard
      -------------------------------------------------------------------------- */
   function initRSVPDashboard() {
     renderRSVPTable();
@@ -206,8 +473,6 @@ const WeddingAdmin = (function () {
 
   function renderRSVPTable() {
     const list = WeddingRSVP.getRSVPList ? WeddingRSVP.getRSVPList() : [];
-    
-    // Stats calculation
     let totalConfirmed = 0;
     let totalDeclined = 0;
     let totalHeadcount = 0;
@@ -285,7 +550,7 @@ const WeddingAdmin = (function () {
   }
 
   /* --------------------------------------------------------------------------
-     3. Wedding Info Editor
+     5. Wedding Info Editor (Chỉnh Sửa Thông Tin Hôn Lễ)
      -------------------------------------------------------------------------- */
   function initInfoEditor() {
     const form = document.getElementById('admin-config-form');
@@ -296,10 +561,11 @@ const WeddingAdmin = (function () {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const newCfg = {
+      const current = getConfig();
+      const newCfg = Object.assign({}, current, {
         groom: {
-          name: document.getElementById('cfg-groom-name').value.trim() || cfg.groom.name,
-          fullName: document.getElementById('cfg-groom-fullname').value.trim() || cfg.groom.fullName,
+          name: document.getElementById('cfg-groom-name').value.trim() || current.groom.name,
+          fullName: document.getElementById('cfg-groom-fullname').value.trim() || current.groom.fullName,
           father: document.getElementById('cfg-groom-father').value.trim(),
           mother: document.getElementById('cfg-groom-mother').value.trim(),
           phone: document.getElementById('cfg-groom-phone').value.trim(),
@@ -308,8 +574,8 @@ const WeddingAdmin = (function () {
           bankAccountName: document.getElementById('cfg-groom-bankacc').value.trim()
         },
         bride: {
-          name: document.getElementById('cfg-bride-name').value.trim() || cfg.bride.name,
-          fullName: document.getElementById('cfg-bride-fullname').value.trim() || cfg.bride.fullName,
+          name: document.getElementById('cfg-bride-name').value.trim() || current.bride.name,
+          fullName: document.getElementById('cfg-bride-fullname').value.trim() || current.bride.fullName,
           father: document.getElementById('cfg-bride-father').value.trim(),
           mother: document.getElementById('cfg-bride-mother').value.trim(),
           phone: document.getElementById('cfg-bride-phone').value.trim(),
@@ -317,7 +583,7 @@ const WeddingAdmin = (function () {
           bankNumber: document.getElementById('cfg-bride-banknum').value.trim(),
           bankAccountName: document.getElementById('cfg-bride-bankacc').value.trim()
         },
-        weddingDate: document.getElementById('cfg-wedding-date').value || cfg.weddingDate,
+        weddingDate: document.getElementById('cfg-wedding-date').value || current.weddingDate,
         ceremonyGroom: {
           title: document.getElementById('cfg-ceremony-groom-title').value.trim(),
           time: document.getElementById('cfg-ceremony-groom-time').value.trim(),
@@ -332,7 +598,7 @@ const WeddingAdmin = (function () {
           address: document.getElementById('cfg-ceremony-bride-address').value.trim(),
           mapUrl: document.getElementById('cfg-ceremony-bride-map').value.trim()
         }
-      };
+      });
 
       saveConfig(newCfg);
       alert('Đã lưu thông tin đám cưới thành công! Các trang sẽ cập nhật thông tin mới nhất.');
@@ -429,8 +695,13 @@ const WeddingAdmin = (function () {
     getConfig,
     saveConfig,
     copyText,
+    applyTheme,
+    handleImageUpload,
+    handleImageUrl,
+    resetImage,
     deleteRSVPItem,
-    renderRSVPTable
+    renderRSVPTable,
+    THEMES_CATALOG
   };
 })();
 

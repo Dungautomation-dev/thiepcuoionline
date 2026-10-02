@@ -1,4 +1,4 @@
-# 💍 Thiệp Cưới Online - Mạnh Dũng & Mai Chi (Luxury Wedding Invitation) ✨👰🤵
+# 💍 Thiệp Cưới Online - Tên Chú Rể & Tên Cô Dâu (Luxury Wedding Invitation) ✨👰🤵
 
 <p align="center">
   <a href="README.md"><b>🇻🇳 Tiếng Việt</b></a> &nbsp;|&nbsp; 
@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <strong>Trang web thiệp cưới online cao cấp (Luxury Interactive Wedding Invitation) — Phong bì mở thiệp đóng dấu sáp 3D, cá nhân hóa tên khách mời, hiệu ứng trái tim bay canvas, định vị bản đồ Google Maps, xác nhận tham dự RSVP và Bảng điều khiển Admin tự động sinh link hàng loạt! 💖🥂</strong>
+  <strong>Trang web thiệp cưới online cao cấp (Luxury Interactive Wedding Invitation) — Mở phong bì đóng dấu sáp 3D, rút gọn link mời khách <code>?to=tenkhachhang</code>, 10 template mẫu cưới sang trọng, tùy chỉnh ảnh thực tế, trái tim bay canvas, định vị bản đồ Google Maps, xác nhận tham dự RSVP và Bảng điều khiển Admin tự động sinh link hàng loạt! 💖🥂</strong>
 </p>
 
 ---
@@ -48,16 +48,36 @@ Dự án được tối ưu hóa đặc biệt theo chuẩn **Mobile-First** nh�
   * Tự động kích hoạt giai điệu âm nhạc tình yêu lãng mạn (vượt qua rào cản autoplay của trình duyệt web một cách mượt mà).
   * Phong bì trượt mở đưa khách mời bước vào thế giới hôn lễ lung linh.
 
-### 2. 🏷️ Cá Nhân Hóa Khách Mời Qua Đường Dẫn Link (`?to=...`)
-* Hỗ trợ truyền tên khách mời linh hoạt qua tham số URL:
-  * `?to=Anh%20Nam%20%26%20Gia%20Đình`
-  * `?to=Bạn%20Thảo%20(Cấp%203)&side=groom`
-* Toàn bộ lời đề tặng ở phong bì thư, tiêu đề thiệp cưới và trường xác nhận họ tên sẽ tự động đồng bộ hóa đích danh người nhận.
+### 2. ⚡ Rút Gọn Link Khách Mời Siêu Đẹp (`?to=tenkhachhang`)
+* Hỗ trợ tạo link rút gọn không dấu cực kỳ chuyên nghiệp và thân thiện:
+  * Ví dụ: `https://dungautomation-dev.github.io/thiepcuoionline/?to=anhnam` hoặc `?to=tenkhachhang`
+  * Hệ thống tự động ánh xạ (*Mapping Dictionary*) để khi mở ra, thiệp vẫn hiển thị đầy đủ tên có dấu trang trọng: **"Kính mời: Anh Nam & Gia Đình"**!
+  * Hỗ trợ cả 3 định dạng: Rút gọn không dấu (`?to=tenkhachhang`), Rút gọn có gạch nối (`?to=ten-khach-hang`), và Giữ nguyên có dấu (`?to=Tên%20Khách`).
 
-### 3. 👰🤵 Giới Thiệu Chú Rể, Cô Dâu & Album Ảnh Cưới Toàn Màn Hình
-* Khung ảnh chân dung nghệ thuật của Chú Rể và Cô Dâu kèm thông tin tứ thân phụ mẫu và liên hệ.
-* **Đồng hồ đếm ngược (Countdown Timer)** thời gian thực đến giây phút thiêng liêng thành hôn.
-* **Album ảnh cưới nghệ thuật (Wedding Gallery)**: Tích hợp trình xem ảnh phóng to toàn màn hình (*Fullscreen Lightbox*) với điều khiển phím mũi tên hoặc nút chuyển ảnh mượt mà.
+### 3. 🎨 10 Template Mẫu Thiệp Cưới Sang Trọng
+Tích hợp sẵn 10 mẫu phong cách trong Bảng Điều Khiển Admin với khung xem trước màu sắc trực quan:
+1. 👑 **Champagne Gold & Ruby**: Vàng Champagne quý tộc & Đỏ rượu vang Ruby (Mặc định).
+2. 🌸 **Rose Gold & Blush Pink**: Vàng Hồng Rose Gold & Hồng Phấn pastel lãng mạn.
+3. 🌿 **Emerald & Botanical Green**: Xanh ngọc lục bảo & lá cây bạch đàn Rustic.
+4. 🕊️ **Classic Minimalist Black & White**: Đen trắng tối giản, tinh khôi & viền bạc.
+5. 🌊 **Ocean & Santorini Blue**: Xanh biển Santorini & ánh vàng hải quân.
+6. 🍷 **Burgundy & Dark Plum**: Đỏ rượu vang Bordeaux đằm thắm & ánh nến ấm áp.
+7. 💜 **Lavender & Lilac Dream**: Tím oải hương thơ mộng & lãng mạn thủy chung.
+8. 🍂 **Warm Terracotta & Sunset**: Cam đất bohemian hoàng hôn ấm áp.
+9. 🪷 **Royal Lotus Traditional**: Đỏ son truyền thống, hoa sen hồng & chữ Hỷ vàng kim.
+10. ✨ **Celestial Starry Night**: Dạ yến bầu trời đêm ngân hà & ánh sao kim sa lấp lánh.
+
+### 4. 🖼️ Tùy Chỉnh Hình Ảnh Cưới Của Riêng Bạn (Image Customizer)
+* Thay thế ảnh cưới linh hoạt trong mục Admin:
+  * Ảnh cổng hoa / Banner đầu trang
+  * Ảnh chân dung Chú Rể
+  * Ảnh chân dung Cô Dâu
+  * Ảnh nhẫn cưới & hoa hồng
+  * Ảnh dạo bước vườn hồng
+* **2 cách thêm ảnh**:
+  * Tải ảnh trực tiếp từ điện thoại / máy tính (hệ thống tự động lưu trữ tức thì).
+  * Hoặc dán đường link ảnh online bất kỳ (Imgur, Facebook, Google Drive, Cloudinary...).
+* Có khung xem trước ảnh (*Thumbnail Preview*) trực quan trước khi lưu!
 
 ### 4. 💖 Hiệu Ứng Trái Tim Bay Vật Lý Canvas & Tương Tác Chạm
 * Bầu không khí ngập tràn tình yêu với các hạt trái tim bay bổng (vàng champagne, đỏ ruby, hồng pastel) chuyển động lượn sóng tự nhiên 60 FPS.
