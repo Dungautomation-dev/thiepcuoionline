@@ -13,13 +13,171 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   0. Theme Initialization
+   0. Theme Initialization & Distinct Layout Presentation
    -------------------------------------------------------------------------- */
 function initTheme() {
-  if (!window.WeddingAdmin) return;
-  const cfg = window.WeddingAdmin.getConfig();
-  if (cfg.theme) {
-    document.body.setAttribute('data-theme', cfg.theme);
+  const urlParams = new URLSearchParams(window.location.search);
+  const themeParam = urlParams.get('theme');
+  
+  let currentTheme = 'royal-baroque';
+
+  if (themeParam) {
+    currentTheme = themeParam.trim();
+  } else if (window.WeddingAdmin) {
+    const cfg = window.WeddingAdmin.getConfig();
+    if (cfg && cfg.theme) {
+      currentTheme = cfg.theme;
+    }
+  }
+
+  document.body.setAttribute('data-theme', currentTheme);
+  injectThemeOrnaments(currentTheme);
+}
+
+function injectThemeOrnaments(theme) {
+  const banner = document.getElementById('theme-masthead-banner');
+  const frame = document.getElementById('theme-frame-ornament');
+
+  if (!banner || !frame) return;
+
+  // Clear previous ornaments
+  banner.innerHTML = '';
+  frame.innerHTML = '';
+
+  // 1. Editorial Magazine (Vogue Style)
+  if (theme === 'vogue-editorial' || theme === 'classic-bw') {
+    banner.innerHTML = `
+      <div class="vogue-masthead">
+        <div class="vogue-meta-top">
+          <span>VOL. 2026 • SPECIAL WEDDING ISSUE</span>
+          <span>EST. LOVE</span>
+        </div>
+        <div class="vogue-title">V O G U E</div>
+        <div class="vogue-subtitle">THE WEDDING CELEBRATION • COLLECTOR'S EDITION</div>
+        <div class="vogue-line"></div>
+      </div>
+    `;
+    frame.innerHTML = `
+      <div class="vogue-frame-barcode">
+        <i class="fa-solid fa-barcode"></i>
+        <span>LOVE-STORY-2026-VIP</span>
+      </div>
+    `;
+  }
+  // 2. Traditional Song Hỷ (Hoàng Cung Á Đông)
+  else if (theme === 'traditional-hy' || theme === 'lotus-traditional') {
+    banner.innerHTML = `
+      <div class="traditional-hy-banner">
+        <div class="traditional-clouds">
+          <i class="fa-solid fa-fan"></i>
+          <span class="traditional-hy-emblem">囍</span>
+          <i class="fa-solid fa-fan"></i>
+        </div>
+        <div class="traditional-title-badge">TRÂN TRỌNG BÁO HỶ</div>
+      </div>
+    `;
+    frame.innerHTML = `
+      <div class="traditional-corner corner-tl"></div>
+      <div class="traditional-corner corner-tr"></div>
+      <div class="traditional-corner corner-bl"></div>
+      <div class="traditional-corner corner-br"></div>
+    `;
+  }
+  // 3. Vintage Newspaper (The Wedding Chronicle 1920s)
+  else if (theme === 'vintage-newspaper') {
+    banner.innerHTML = `
+      <div class="newspaper-masthead">
+        <div class="newspaper-top-bar">
+          <span>HÀ NỘI, VIỆT NAM • NĂM 2026</span>
+          <span class="news-title-tag">★ THE WEDDING CHRONICLE ★</span>
+          <span>GIÁ TRỊ: VÔ GIÁ</span>
+        </div>
+        <h2 class="newspaper-main-headline">CHUYỆN TÌNH THẾ KỶ: HỌ ĐÃ NÓI ĐỒNG Ý!</h2>
+        <div class="newspaper-sub-meta">Bản tin đặc biệt ghi dấu ngày chung đôi của đôi uyên ương hạnh phúc</div>
+        <div class="newspaper-divider-line"></div>
+      </div>
+    `;
+    frame.innerHTML = `
+      <div class="newspaper-stamp-badge">
+        <i class="fa-solid fa-stamp"></i> OFFICIAL PHOTO
+      </div>
+    `;
+  }
+  // 4. Cinematic Noir (35mm Filmstrip Cinema)
+  else if (theme === 'cinematic-noir' || theme === 'starry-night') {
+    banner.innerHTML = `
+      <div class="cinema-marquee">
+        <div class="cinema-spotlight-beam"></div>
+        <div class="cinema-presents">A CINEMATIC LOVE STORY PRESENTS</div>
+        <div class="cinema-tagline">STARRING THE BRIDE &amp; THE GROOM • DIRECTED BY DESTINY</div>
+      </div>
+    `;
+    frame.innerHTML = `
+      <div class="filmstrip-sprockets sprockets-left"></div>
+      <div class="filmstrip-sprockets sprockets-right"></div>
+      <div class="cinema-badge-ticket"><i class="fa-solid fa-film"></i> 35MM CINEMA ARCHIVE</div>
+    `;
+  }
+  // 5. Romantic Arch (Vườn Địa Đàng)
+  else if (theme === 'romantic-arch' || theme === 'rose-gold') {
+    banner.innerHTML = `
+      <div class="romantic-arch-header">
+        <div class="arch-floral-flourish">
+          <i class="fa-solid fa-heart" style="color:#d88a95;"></i>
+          <span>Our Love Journey</span>
+          <i class="fa-solid fa-heart" style="color:#d88a95;"></i>
+        </div>
+      </div>
+    `;
+  }
+  // 6. Bohemian Pampas (Đồi Cỏ Cháy)
+  else if (theme === 'boho-rustic' || theme === 'terracotta') {
+    banner.innerHTML = `
+      <div class="boho-header-badge">
+        <i class="fa-solid fa-seedling"></i>
+        <span>WILD AT HEART • BOHO PAMPAS VIBE</span>
+        <i class="fa-solid fa-seedling"></i>
+      </div>
+    `;
+  }
+  // 7. Santorini Breeze (Địa Trung Hải)
+  else if (theme === 'santorini-breeze' || theme === 'ocean-blue') {
+    banner.innerHTML = `
+      <div class="santorini-header">
+        <span class="santorini-dome-pill"><i class="fa-solid fa-water"></i> SANTORINI COAST • AEGEAN BREEZE</span>
+      </div>
+    `;
+  }
+  // 8. Royal Baroque (Hoàng Gia Versailles)
+  else if (theme === 'royal-baroque' || theme === 'champagne-gold' || theme === 'burgundy') {
+    banner.innerHTML = `
+      <div class="royal-crest-header">
+        <div class="royal-crest-crown"><i class="fa-solid fa-crown"></i></div>
+        <span class="royal-crest-tag">ROYAL IMPERIAL WEDDING</span>
+      </div>
+    `;
+    frame.innerHTML = `
+      <div class="royal-filigree-corner r-corner-tl"></div>
+      <div class="royal-filigree-corner r-corner-tr"></div>
+      <div class="royal-filigree-corner r-corner-bl"></div>
+      <div class="royal-filigree-corner r-corner-br"></div>
+    `;
+  }
+  // 9. Polaroid Scrapbook (Nhật Ký Kỷ Niệm)
+  else if (theme === 'polaroid-scrapbook' || theme === 'lavender') {
+    frame.innerHTML = `
+      <div class="washi-tape washi-left"></div>
+      <div class="washi-tape washi-right"></div>
+      <div class="polaroid-paperclip"><i class="fa-solid fa-paperclip"></i></div>
+    `;
+  }
+  // 10. Minimal Glass (Kính Mờ Đương Đại)
+  else if (theme === 'minimal-glass' || theme === 'emerald-green') {
+    banner.innerHTML = `
+      <div class="glass-modern-header">
+        <span class="glass-pill-badge"><i class="fa-solid fa-cube"></i> MINIMAL GLASS &amp; AURORA</span>
+      </div>
+    `;
   }
 }
 

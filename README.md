@@ -54,29 +54,43 @@ Dự án được tối ưu hóa đặc biệt theo chuẩn **Mobile-First** nh�
   * Hệ thống tự động ánh xạ (*Mapping Dictionary*) để khi mở ra, thiệp vẫn hiển thị đầy đủ tên có dấu trang trọng: **"Kính mời: Anh Nam & Gia Đình"**!
   * Hỗ trợ cả 3 định dạng: Rút gọn không dấu (`?to=tenkhachhang`), Rút gọn có gạch nối (`?to=ten-khach-hang`), và Giữ nguyên có dấu (`?to=Tên%20Khách`).
 
-### 3. 🎨 10 Template Mẫu Thiệp Cưới Sang Trọng
-Tích hợp sẵn 10 mẫu phong cách trong Bảng Điều Khiển Admin với khung xem trước màu sắc trực quan:
-1. 👑 **Champagne Gold & Ruby**: Vàng Champagne quý tộc & Đỏ rượu vang Ruby (Mặc định).
-2. 🌸 **Rose Gold & Blush Pink**: Vàng Hồng Rose Gold & Hồng Phấn pastel lãng mạn.
-3. 🌿 **Emerald & Botanical Green**: Xanh ngọc lục bảo & lá cây bạch đàn Rustic.
-4. 🕊️ **Classic Minimalist Black & White**: Đen trắng tối giản, tinh khôi & viền bạc.
-5. 🌊 **Ocean & Santorini Blue**: Xanh biển Santorini & ánh vàng hải quân.
-6. 🍷 **Burgundy & Dark Plum**: Đỏ rượu vang Bordeaux đằm thắm & ánh nến ấm áp.
-7. 💜 **Lavender & Lilac Dream**: Tím oải hương thơ mộng & lãng mạn thủy chung.
-8. 🍂 **Warm Terracotta & Sunset**: Cam đất bohemian hoàng hôn ấm áp.
-9. 🪷 **Royal Lotus Traditional**: Đỏ son truyền thống, hoa sen hồng & chữ Hỷ vàng kim.
-10. ✨ **Celestial Starry Night**: Dạ yến bầu trời đêm ngân hà & ánh sao kim sa lấp lánh.
+### 3. 🎨 10 Phong Cách Thiệp Cưới Độc Bản (10 Distinct Presentation Archetypes)
+Không chỉ thay đổi màu sắc, mỗi mẫu thiệp là **một cấu trúc layout, typography và phong cách thẩm mỹ hoàn toàn riêng biệt**, lấy cảm hứng từ các nền tảng thiệp cưới hàng đầu thế giới ([Cinelove.me](https://cinelove.me/)):
+1. 📰 **Vogue Editorial Magazine (`vogue-editorial`)**: Bìa tạp chí thời trang VOGUE cao cấp, font Serif khổ lớn, barcode ấn phẩm VIP, khung ảnh góc cạnh hiện đại.
+2. 🪷 **Cổ Điển Á Đông - Song Hỷ Hoàng Cung (`traditional-hy`)**: Chữ Song Hỷ 囍 mạ vàng dập nổi, hoa sen, mây cát tường, viền triện son đỏ cung đình.
+3. 🌸 **Vườn Địa Đàng - Romantic Floral Arch (`romantic-arch`)**: Khung vòm Roman uốn lượn duyên dáng, hoa hồng pastel, chữ viết tay bay bổng lãng mạn.
+4. 📜 **Nhật Báo Tình Yêu - The Wedding Chronicle (`vintage-newspaper`)**: Phong cách báo in cổ điển 1920s 3 cột, font chữ máy đánh chữ, tem bưu điện & dấu mộc bưu cục.
+5. 🎬 **Thước Phim Điện Ảnh - 35mm Cinema Noir (`cinematic-noir`)**: Khung dải phim 35mm Hollywood, nền tối nhung sang trọng, vé xem phim VIP Gold Ticket.
+6. 🌊 **Địa Trung Hải - Santorini Azure (`santorini-breeze`)**: Kiến trúc mái vòm xanh Coban, tường trắng tinh khôi Hy Lạp, giàn hoa giấy Bougainvillea rủ bóng.
+7. 🍂 **Đồi Cỏ Cháy - Boho Pampas Grass (`boho-rustic`)**: Góc bo organic bất đối xứng, cam đất nung terracotta, nhành cỏ lau pampas mộc mạc.
+8. 👑 **Hoàng Gia Châu Âu - Versailles Baroque (`royal-baroque`)**: Hoa văn phù điêu Rococo mạ vàng 24K, khung gương quý tộc, vương miện & dải ruy băng lụa.
+9. 📷 **Nhật Ký Kỷ Niệm - Polaroid Keepsake (`polaroid-scrapbook`)**: Ảnh Polaroid góc nghiêng kẹp ghim, băng dính washi tape và ghi chú viết tay tự nhiên.
+10. 💎 **Kính Mờ Đương Đại - Minimal Glass & Aurora (`minimal-glass`)**: Kính mờ phủ sương frosted glass xuyên thấu ánh cực quang Aurora, Swiss minimalism siêu sạch.
 
-### 4. 🖼️ Tùy Chỉnh Hình Ảnh Cưới Của Riêng Bạn (Image Customizer)
+> 💡 **Mẹo xem nhanh**: Bạn có thể xem trước bất kỳ mẫu thiệp nào bằng cách thêm tham số URL, ví dụ:  
+> `?theme=vogue-editorial` • `?theme=vintage-newspaper` • `?theme=cinematic-noir` • `?theme=traditional-hy`...
+
+### 4. 📸 Album 20 Ảnh Cưới & Trình Diễn Tự Động Siêu Xinh (Auto-Slideshow 20 Photos)
+* **Trình chiếu tự động Ken-Burns lãng mạn**:
+  * Tự động nhảy và chuyển ảnh mượt mà sau mỗi 3.8 giây kèm hiệu ứng zoom Ken-Burns nghệ thuật.
+  * Tự động tạm dừng khi rê chuột hoặc chạm tay trên màn hình điện thoại.
+  * Nút Play/Pause, chuyển ảnh Trước/Sau và nút **Toàn màn hình (Fullscreen)** để trình chiếu như một rạp chiếu phim mini.
+  * Thanh tiến trình thời gian thực (*Progress Bar*) phát sáng theo tông màu giao diện.
+  * Dải thumbnail trượt 20 ảnh nhỏ xinh bên dưới: click vào ảnh bất kỳ để nhảy tới ngay.
+* **Lưới 20 ảnh nghệ thuật (Mosaic Photo Wall)**:
+  * Trưng bày trọn vẹn 20 khoảnh khắc cưới với huy hiệu trái tim `#1` đến `#20`, tiêu đề và lời chú thích ngọt ngào.
+  * Chạm vào bất kỳ ảnh nào để phóng to với **Kính lúp Lightbox siêu nét**, hỗ trợ phím mũi tên và vuốt màn hình cảm ứng trên điện thoại.
+* **Quản lý linh hoạt trong Admin**:
+  * Chỉnh sửa ảnh và lời tựa cho từng ảnh trong 20 ảnh (upload file Base64 hoặc dán URL online).
+  * 1-Click khôi phục bộ 20 ảnh mẫu siêu xinh mặc định.
+
+### 5. 🖼️ Tùy Chỉnh Ảnh Đại Diện Chính & Cặp Đôi (Key Photos)
 * Thay thế ảnh cưới linh hoạt trong mục Admin:
   * Ảnh cổng hoa / Banner đầu trang
   * Ảnh chân dung Chú Rể
   * Ảnh chân dung Cô Dâu
   * Ảnh nhẫn cưới & hoa hồng
   * Ảnh dạo bước vườn hồng
-* **2 cách thêm ảnh**:
-  * Tải ảnh trực tiếp từ điện thoại / máy tính (hệ thống tự động lưu trữ tức thì).
-  * Hoặc dán đường link ảnh online bất kỳ (Imgur, Facebook, Google Drive, Cloudinary...).
 * Có khung xem trước ảnh (*Thumbnail Preview*) trực quan trước khi lưu!
 
 ### 4. 💖 Hiệu Ứng Trái Tim Bay Vật Lý Canvas & Tương Tác Chạm

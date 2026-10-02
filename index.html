@@ -16,10 +16,10 @@
   <!-- Favicon -->
   <link rel="icon" href="assets/images/wedding-rings.jpg" type="image/jpeg">
 
-  <!-- Google Fonts: Great Vibes, Dancing Script, Playfair Display, Montserrat, Be Vietnam Pro -->
+  <!-- Google Fonts for 10 Unique Wedding Template Archetypes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600;700&family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -88,7 +88,10 @@
   <main class="main-wrapper">
 
     <!-- Hero Card Section -->
-    <section class="hero-card">
+    <section class="hero-card" id="main-hero-card">
+      <!-- Distinct Theme Archetype Top Banner (Newspaper Masthead, Film Credits, Song Hy Medallion, Vogue Issue, etc.) -->
+      <div class="theme-masthead-banner" id="theme-masthead-banner"></div>
+
       <div class="hero-guest-callout">
         <span class="guest-title">Trân trọng kính mời:</span>
         <span class="guest-highlight" id="hero-guest-name">Quý Khách &amp; Gia Đình</span>
@@ -102,8 +105,10 @@
       </p>
 
       <!-- Main Wedding Big Photo Frame -->
-      <div class="hero-photo-frame">
+      <div class="hero-photo-frame" id="main-hero-photo-frame">
+        <div class="theme-frame-ornament" id="theme-frame-ornament"></div>
         <img src="assets/images/wedding-hero.jpg" alt="Ảnh cưới đẹp" id="hero-photo-img">
+        <div class="theme-polaroid-caption" id="theme-polaroid-caption">Forever &amp; Always • 2026 ♡</div>
       </div>
 
       <!-- Real-time Wedding Countdown Timer -->
@@ -292,40 +297,71 @@
     </section>
 
     <!-- ========================================================================
-         5. WEDDING PHOTO ALBUM GALLERY SECTION
+         5. WEDDING PHOTO ALBUM GALLERY SECTION (20-PHOTO AUTO SLIDESHOW)
          ======================================================================== -->
-    <section class="gallery-section">
+    <section class="gallery-section" id="gallery-section">
       <div class="section-heading">
-        <span class="section-tag"><i class="fa-solid fa-images"></i> Album Kỷ Niệm</span>
+        <span class="section-tag"><i class="fa-solid fa-images"></i> Album Kỷ Niệm (20 Khoảnh Khắc)</span>
         <h2 class="section-title">Khoảnh Khắc Yêu Thương</h2>
-        <p class="section-subtitle">Chạm vào từng bức ảnh để chiêm ngưỡng album cưới ở chế độ toàn màn hình.</p>
+        <p class="section-subtitle">Chương tình yêu trọn vẹn được lưu giữ qua từng khung hình ngọt ngào.</p>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="assets/images/wedding-hero.jpg" alt="Lễ thành hôn dưới vòm hoa">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+      <!-- Featured Romantic Auto-Slideshow Container -->
+      <div class="wedding-slideshow-container" id="wedding-slideshow-container">
+        <!-- Stage Frame -->
+        <div class="slideshow-stage" id="slideshow-stage" title="Chạm để phóng to xem ảnh full">
+          <img src="assets/images/gallery-1.jpg" alt="Khoảnh khắc kỷ niệm" id="slideshow-current-img" class="slideshow-current-img slide-active">
+          
+          <!-- Romantic Ken-Burns Vignette Overlay -->
+          <div class="slideshow-vignette-overlay"></div>
+
+          <!-- Top Badge & Auto-Play Status -->
+          <div class="slideshow-top-bar">
+            <span class="slideshow-mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Tự Động Trình Chiếu</span>
+            <span class="slideshow-counter" id="slideshow-slide-counter">01 / 20</span>
+          </div>
+
+          <!-- Bottom Romantic Caption -->
+          <div class="slideshow-caption-overlay">
+            <h3 class="slideshow-title" id="slideshow-slide-title">Khoảnh Khắc Về Chung Một Nhà</h3>
+            <p class="slideshow-caption" id="slideshow-slide-caption">Ngày hạnh phúc nhất đời chúng mình bắt đầu từ nụ cười của em.</p>
+          </div>
+
+          <!-- Smooth Progress Bar -->
+          <div class="slideshow-progress-track">
+            <div class="slideshow-progress-bar running" id="slideshow-progress-bar"></div>
+          </div>
         </div>
-        <div class="gallery-item">
-          <img src="assets/images/wedding-walk.jpg" alt="Khoảnh khắc dạo bước vườn hồng" id="walk-photo-img">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+
+        <!-- Interactive Control Bar -->
+        <div class="slideshow-controls-bar">
+          <button type="button" class="slideshow-ctrl-btn" id="btn-slideshow-prev" title="Ảnh trước">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button type="button" class="slideshow-ctrl-btn btn-playpause" id="btn-slideshow-playpause" title="Tạm dừng / Tiếp tục">
+            <i class="fa-solid fa-pause"></i>
+          </button>
+          <button type="button" class="slideshow-ctrl-btn" id="btn-slideshow-next" title="Ảnh tiếp theo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <button type="button" class="slideshow-ctrl-btn btn-fs" id="btn-slideshow-fullscreen" title="Xem toàn màn hình">
+            <i class="fa-solid fa-expand"></i>
+          </button>
         </div>
-        <div class="gallery-item">
-          <img src="assets/images/wedding-rings.jpg" alt="Cặp nhẫn cưới kim cương vàng kim" id="rings-photo-img">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
+
+        <!-- Horizontal Scrollable Thumbnails Strip (20 Photos) -->
+        <div class="slideshow-thumbnails-strip" id="slideshow-thumbnails">
+          <!-- Dynamically populated with 20 mini thumbnails by gallery.js -->
         </div>
-        <div class="gallery-item">
-          <img src="assets/images/groom.jpg" alt="Chú rể">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/images/bride.jpg" alt="Cô dâu">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
-        </div>
-        <div class="gallery-item">
-          <img src="assets/images/wedding-hero.jpg" alt="Trọn vẹn hạnh phúc">
-          <div class="gallery-overlay-badge"><i class="fa-solid fa-magnifying-glass-plus" style="margin-right:6px;"></i> Phóng to ảnh</div>
-        </div>
+      </div>
+
+      <!-- 20-Photo Mosaic Wall (Masonry Photo Grid) -->
+      <div class="mosaic-gallery-header">
+        <h3 class="mosaic-section-title"><i class="fa-solid fa-heart" style="color:var(--ruby-primary);"></i> Trọn Vẹn 20 Khoảnh Khắc Hạnh Phúc</h3>
+        <span class="mosaic-section-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm vào ảnh bất kỳ để xem toàn màn hình</span>
+      </div>
+      <div class="gallery-mosaic-grid" id="gallery-mosaic-grid">
+        <!-- Dynamically populated with 20 photo cards by gallery.js -->
       </div>
     </section>
 
@@ -469,14 +505,26 @@
   </div>
 
   <!-- ========================================================================
-       MODAL: FULLSCREEN PHOTO LIGHTBOX
+       MODAL: FULLSCREEN PHOTO LIGHTBOX VIEWER
        ======================================================================== -->
   <div class="lightbox-overlay" id="lightbox-modal">
-    <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="WeddingGallery.prev()" title="Ảnh trước">
+    <div class="lightbox-top-bar">
+      <span class="lightbox-counter" id="lightbox-counter">01 / 20</span>
+      <button type="button" class="lightbox-close-btn" id="btn-lightbox-close" title="Đóng (Esc)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <button type="button" class="lightbox-nav-btn lightbox-prev" id="btn-lightbox-prev" title="Ảnh trước (Mũi tên trái)">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
-    <img src="" alt="Ảnh cưới phóng to" class="lightbox-img" id="lightbox-image">
-    <button type="button" class="lightbox-nav-btn lightbox-next" onclick="WeddingGallery.next()" title="Ảnh tiếp theo">
+    
+    <div class="lightbox-stage">
+      <img src="" alt="Ảnh cưới phóng to" class="lightbox-img" id="lightbox-image">
+      <div class="lightbox-caption-bar" id="lightbox-title"></div>
+    </div>
+
+    <button type="button" class="lightbox-nav-btn lightbox-next" id="btn-lightbox-next" title="Ảnh tiếp theo (Mũi tên phải)">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>

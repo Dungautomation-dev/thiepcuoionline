@@ -54,27 +54,43 @@ Crafted with a **Mobile-First** design approach, it delivers an emotional and ca
   * Automatically maps slugs to full formatted names with Vietnamese accents: **"Kính mời: Anh Nam & Gia Đình"**!
   * Supports 3 slug formats: Compact unaccented (`?to=tenkhachhang`), Hyphenated (`?to=ten-khach-hang`), and Standard encoded (`?to=Full%20Name`).
 
-### 3. 🎨 10 Luxury Wedding Template Presets
-Built-in 10 themes with live preview color chips:
-1. 👑 **Champagne Gold & Ruby**: Aristocratic gold & ruby wine (Default).
-2. 🌸 **Rose Gold & Blush Pink**: Soft romantic blush & rose gold.
-3. 🌿 **Emerald & Botanical Green**: Forest emerald & eucalyptus rustic garden.
-4. 🕊️ **Classic Minimalist Black & White**: Monochrome elegance & silver borders.
-5. 🌊 **Ocean & Santorini Blue**: Aegean navy blue & golden shores.
-6. 🍷 **Burgundy & Dark Plum**: Deep Bordeaux wine & warm candle glow.
-7. 💜 **Lavender & Lilac Dream**: Dreamy lilac & everlasting lavender.
-8. 🍂 **Warm Terracotta & Sunset**: Bohemian terracotta & pampas grass.
-9. 🪷 **Royal Lotus Traditional**: Traditional scarlet red, pink lotus & gold double happiness.
-10. ✨ **Celestial Starry Night**: Midnight starry sky & golden galaxy sparkles.
+### 3. 🎨 10 Distinct Presentation Archetypes
+Beyond color palettes, each theme represents a **completely distinct structural layout, typography pairing, and visual archetype** inspired by global wedding design platforms ([Cinelove.me](https://cinelove.me/)):
+1. 📰 **Vogue Editorial Magazine (`vogue-editorial`)**: High-fashion magazine cover, bold uppercase serif typography, VIP publication barcode, sharp editorial borders.
+2. 🪷 **Imperial Double Happiness (`traditional-hy`)**: Golden embossed Double Happiness 囍 emblem, lotus motifs, auspicious cloud scrollwork, royal crimson brocade.
+3. 🌸 **Romantic Floral Arch (`romantic-arch`)**: Roman curved arch silhouette, pastel rose garden flourishes, elegant cursive typography.
+4. 📜 **The Wedding Chronicle 1920s (`vintage-newspaper`)**: 3-column vintage newsprint layout, typewriter fonts, postage stamps, and postal postmarks.
+5. 🎬 **35mm Cinema Noir (`cinematic-noir`)**: Authentic 35mm Hollywood filmstrip sprockets, luxury obsidian background, VIP Gold Ticket passes.
+6. 🌊 **Santorini Azure Coast (`santorini-breeze`)**: Aegean cobalt dome curves, Cycladic whitewashed walls, magenta bougainvillea floral drapes.
+7. 🍂 **Boho Pampas Grass (`boho-rustic`)**: Asymmetrical organic curved borders, terracotta sun-baked tones, dried pampas botanical accents.
+8. 👑 **Versailles Royal Baroque (`royal-baroque`)**: 24K gold Rococo scrollwork, ornate palace mirror frames, royal crown crest & silk ribbons.
+9. 📷 **Polaroid Keepsake (`polaroid-scrapbook`)**: Tilted instant polaroid photo frames, realistic washi tape strips, handwritten cursive notes.
+10. 💎 **Modern Minimal Glass & Aurora (`minimal-glass`)**: Frosted glassmorphism panels, aurora borealis luminous reflections, clean Swiss minimalism.
 
-### 4. 🖼️ Personal Wedding Photo Customizer
-* Replace wedding photos directly inside the Admin Dashboard:
+> 💡 **Quick Preview**: Add `?theme=vogue-editorial`, `?theme=vintage-newspaper`, `?theme=cinematic-noir` etc. to the URL to instantly preview any style!
+
+### 4. 📸 20-Photo Album & Romantic Automated Slideshow
+* **Automated Ken-Burns Transitions**:
+  * Smooth auto-advancing slides every 3.8s with slow cinematic Ken-Burns zooms and crossfades.
+  * Auto-pauses on hover or mobile touch.
+  * Full controls: Play/Pause, Next/Previous, and Fullscreen cinematic projection mode.
+  * Real-time glowing Progress Bar indicator matching the active theme.
+  * Horizontal scrolling 20-thumbnail strip for direct navigation.
+* **20-Photo Mosaic Wall**:
+  * Beautiful responsive masonry grid displaying all 20 wedding moments with index badges `#1` to `#20` and romantic captions.
+  * High-resolution Lightbox Viewer with keyboard arrow navigation and mobile touch gestures.
+* **Admin Photo Manager**:
+  * Manage and customize all 20 photos + captions in the Admin panel (Base64 file upload or online URLs).
+  * 1-Click restore to pre-loaded high-resolution romantic photos.
+
+### 5. 🖼️ Personal Key Wedding Photos Customizer
+* Replace primary profile photos directly inside the Admin Dashboard:
   * Hero Arch Photo / Top Banner
   * Groom Portrait
   * Bride Portrait
   * Wedding Rings & Bouquet
   * Rose Garden Walk
-* Upload directly from device (auto-persisted) or paste any online photo URL with live thumbnail previews!
+* Upload directly from device or paste any online photo URL with live thumbnail previews!
 
 ### 4. 💖 Floating Hearts Canvas Physics & Tap Bursts
 * 60fps HTML5 Canvas physics engine generating floating hearts in champagne gold, ruby wine, and blush rose.

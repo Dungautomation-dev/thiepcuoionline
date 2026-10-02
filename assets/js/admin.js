@@ -6,73 +6,127 @@
 const WeddingAdmin = (function () {
   const CONFIG_KEY = 'thiepcuoi_wedding_config';
 
-  // 10 Wedding Theme Templates Catalog
+  // 10 Distinct Wedding Theme & Layout Presentation Archetypes
   const THEMES_CATALOG = [
     {
-      id: 'champagne-gold',
-      name: 'Hoàng Gia Sang Trọng',
-      desc: 'Vàng Champagne quý phái & Đỏ Ruby',
+      id: 'vogue-editorial',
+      alias: ['classic-bw'],
+      name: 'Tạp Chí Thời Trang (Editorial Magazine)',
+      badge: 'High Fashion',
+      desc: 'Bìa tạp chí VOGUE, chữ Serif khổ lớn, barcode ấn phẩm, layout bất đối xứng sắc sảo',
+      icon: 'fa-solid fa-newspaper',
+      colors: ['#111111', '#c5a059', '#faf9f6']
+    },
+    {
+      id: 'traditional-hy',
+      alias: ['lotus-traditional'],
+      name: 'Cổ Điển Á Đông (Song Hỷ Hoàng Cung)',
+      badge: 'Truyền Thống',
+      desc: 'Chữ Song Hỷ 囍 mạ vàng, họa tiết gấm hoa sen & mây cát tường đỏ son truyền thống',
+      icon: 'fa-solid fa-scroll',
+      colors: ['#b81d24', '#f1c40f', '#fff5f5']
+    },
+    {
+      id: 'romantic-arch',
+      alias: ['rose-gold'],
+      name: 'Vườn Địa Đàng (Romantic Floral Arch)',
+      badge: 'Lãng Mạn',
+      desc: 'Khung vòm Roman uốn cong duyên dáng, hoa hồng pastel, chữ viết tay bay bổng',
+      icon: 'fa-solid fa-archway',
+      colors: ['#d88a95', '#ff9ebb', '#fdf5f7']
+    },
+    {
+      id: 'vintage-newspaper',
+      alias: [],
+      name: 'Nhật Báo Tình Yêu (The Wedding Times)',
+      badge: 'Vintage 1920s',
+      desc: 'Phong cách báo chí cổ điển 3 cột, font chữ máy đánh chữ, tem bưu điện & dấu mộc đỏ',
+      icon: 'fa-solid fa-stamp',
+      colors: ['#2c241d', '#8b5a2b', '#f5ede0']
+    },
+    {
+      id: 'cinematic-noir',
+      alias: ['starry-night'],
+      name: 'Thước Phim Điện Ảnh (Cinema Spotlight)',
+      badge: 'Điện Ảnh 35mm',
+      desc: 'Khung dải phim 35mm Hollywood, nền tối nhung sang trọng, vé xem phim VIP Gold',
+      icon: 'fa-solid fa-film',
+      colors: ['#0b0d13', '#ffd700', '#1c2230']
+    },
+    {
+      id: 'santorini-breeze',
+      alias: ['ocean-blue'],
+      name: 'Địa Trung Hải (Santorini Azure Coast)',
+      badge: 'Biển Xanh',
+      desc: 'Mái vòm xanh Coban, tường trắng tinh khôi Hy Lạp, giàn hoa giấy Bougainvillea',
+      icon: 'fa-solid fa-water',
+      colors: ['#0f3b5f', '#0077b6', '#f2f8fc']
+    },
+    {
+      id: 'boho-rustic',
+      alias: ['terracotta'],
+      name: 'Đồi Cỏ Cháy (Boho Pampas Grass)',
+      badge: 'Bohemian',
+      desc: 'Cam đất nung terracotta, lá cọ lau khô pampas, góc bo organic mộc mạc',
+      icon: 'fa-solid fa-feather',
+      colors: ['#a04000', '#d97d4a', '#faf3ed']
+    },
+    {
+      id: 'royal-baroque',
+      alias: ['champagne-gold', 'burgundy'],
+      name: 'Hoàng Gia Châu Âu (Versailles Baroque)',
+      badge: 'Quý Tộc',
+      desc: 'Họa tiết mạ vàng Rococo 24K, viền gương soi hoàng gia, dải lụa & con dấu sáp 3D',
+      icon: 'fa-solid fa-crown',
       colors: ['#d4af37', '#85142b', '#faf7f2']
     },
     {
-      id: 'rose-gold',
-      name: 'Hồng Pastel Lãng Mạn',
-      desc: 'Vàng Hồng Rose Gold & Hồng Phấn',
-      colors: ['#b76e79', '#ff9ebb', '#fdf5f7']
+      id: 'polaroid-scrapbook',
+      alias: ['lavender'],
+      name: 'Nhật Ký Kỷ Niệm (Polaroid Keepsake)',
+      badge: 'Dễ Thương',
+      desc: 'Ảnh Polaroid góc nghiêng kẹp ghim, băng dính washi tape & lời ghi chú viết tay',
+      icon: 'fa-solid fa-paperclip',
+      colors: ['#4a3f55', '#bb8fce', '#faf6fc']
     },
     {
-      id: 'emerald-green',
-      name: 'Khu Vườn Cổ Tích',
-      desc: 'Xanh Ngọc Lục Bảo & Lá Cây Rustic',
-      colors: ['#1f4e38', '#528c68', '#f5f8f6']
-    },
-    {
-      id: 'classic-bw',
-      name: 'Cổ Điển Tinh Tế',
-      desc: 'Đen Trắng Tối Giản & Viền Bạc',
-      colors: ['#1a1a1a', '#8a8d91', '#fbfbfc']
-    },
-    {
-      id: 'ocean-blue',
-      name: 'Biển Xanh Santorini',
-      desc: 'Xanh Navy & Ánh Vàng Biển',
-      colors: ['#0f3b5f', '#3498db', '#f2f7fb']
-    },
-    {
-      id: 'burgundy',
-      name: 'Rượu Vang Đằm Thắm',
-      desc: 'Đỏ Bordeaux & Ánh Nến Ấm Áp',
-      colors: ['#5c0919', '#d4af37', '#fcf4f5']
-    },
-    {
-      id: 'lavender',
-      name: 'Oải Hương Mộng Mơ',
-      desc: 'Tím Lavender & Lilac Thơ Mộng',
-      colors: ['#5b2c6f', '#bb8fce', '#f9f5fb']
-    },
-    {
-      id: 'terracotta',
-      name: 'Cam Đất Hoàng Hôn',
-      desc: 'Cam Đất Bohemian & Hoa Khô Pampas',
-      colors: ['#a04000', '#d97d4a', '#fcf7f3']
-    },
-    {
-      id: 'lotus-traditional',
-      name: 'Truyền Thống Sen Hồng',
-      desc: 'Đỏ Son Truyền Thống & Chữ Hỷ Vàng',
-      colors: ['#b81d24', '#e84393', '#fff7f7']
-    },
-    {
-      id: 'starry-night',
-      name: 'Dạ Yến Ngân Hà',
-      desc: 'Bầu Trời Đêm Huyền Ảo & Ánh Sao',
-      colors: ['#ffd700', '#e0a96d', '#0c1017']
+      id: 'minimal-glass',
+      alias: ['emerald-green'],
+      name: 'Kính Mờ Tối Giản (Modern Glassmorphism)',
+      badge: 'Đương Đại',
+      desc: 'Kính mờ phủ sương frosted glass, ánh cực quang Aurora, Swiss minimalism siêu sạch',
+      icon: 'fa-solid fa-cubes',
+      colors: ['#1f4e38', '#528c68', '#f4faf6']
     }
+  ];
+
+  // 20 Romantic Pre-Loaded Wedding Album Photos with Captions
+  const DEFAULT_ALBUM_PHOTOS = [
+    { src: 'assets/images/gallery-1.jpg', title: 'Khoảnh Khắc Về Chung Một Nhà', caption: 'Ngày hạnh phúc nhất đời chúng mình bắt đầu từ nụ cười của em.' },
+    { src: 'assets/images/gallery-2.jpg', title: 'Ánh Mắt Yêu Thương', caption: 'Chỉ cần một ánh nhìn, ta hiểu rằng đối phương chính là cả thế giới.' },
+    { src: 'assets/images/gallery-3.jpg', title: 'Vòng Hoa Ước Nguyện', caption: 'Dưới vòm hoa trắng tinh khôi, hai trái tim chung một nhịp đập.' },
+    { src: 'assets/images/gallery-4.jpg', title: 'Nụ Cười Rạng Rỡ', caption: 'Từng nụ cười, từng ánh mắt đều gói trọn trọn vẹn sự ngọt ngào.' },
+    { src: 'assets/images/gallery-5.jpg', title: 'Cùng Nhau Dạo Bước', caption: 'Tay nắm chặt bàn tay, vững bước đi qua muôn vàn giông bão cuộc đời.' },
+    { src: 'assets/images/gallery-6.jpg', title: 'Khiêu Vũ Dưới Ánh Đèn', caption: 'Bản hòa ca của tình yêu ngân vang dưới ngàn ánh đèn lung linh.' },
+    { src: 'assets/images/gallery-7.jpg', title: 'Lời Thề Nguyện Trăm Năm', caption: 'Anh hứa sẽ luôn yêu thương, trân trọng và chở che em suốt đời.' },
+    { src: 'assets/images/gallery-8.jpg', title: 'Nâng Ly Chúc Mừng', caption: 'Cùng người thân và bạn bè nâng ly chúc phúc cho ngày hạnh phúc.' },
+    { src: 'assets/images/gallery-9.jpg', title: 'Chiếc Xe Hoa Hạnh Phúc', caption: 'Chuyến xe đưa chúng ta về chung một tổ ấm yêu thương.' },
+    { src: 'assets/images/gallery-10.jpg', title: 'Bàn Tiệc Nến Thơm', caption: 'Không gian ấm cúng, sang trọng đón chào quý khách quý.' },
+    { src: 'assets/images/gallery-11.jpg', title: 'Khoảnh Khắc Cô Dâu', caption: 'Vẻ đẹp dịu dàng, e ấp trong tà áo cưới trắng tinh khôi.' },
+    { src: 'assets/images/gallery-12.jpg', title: 'Phong Thái Chú Rể', caption: 'Người đàn ông trưởng thành, sẵn sàng gánh vác tương lai.' },
+    { src: 'assets/images/gallery-13.jpg', title: 'Cắt Bánh Hạnh Phúc', caption: 'Vị ngọt của bánh cưới cũng như tình yêu đôi lứa đượm nồng.' },
+    { src: 'assets/images/gallery-14.jpg', title: 'Hoàng Hôn Nắng Vàng', caption: 'Chiều hoàng hôn buông xuống, nhuộm hồng những lời hẹn ước.' },
+    { src: 'assets/images/gallery-15.jpg', title: 'Ngập Tràn Tiếng Cười', caption: 'Hạnh phúc giản đơn là những giây phút bên nhau tràn ngập niềm vui.' },
+    { src: 'assets/images/gallery-16.jpg', title: 'Pháo Hoa Rực Rỡ', caption: 'Ngàn tia sáng lấp lánh thắp sáng đêm tiệc hôn lễ ngọt ngào.' },
+    { src: 'assets/images/gallery-17.jpg', title: 'Chiếc Nhẫn Đính Ước', caption: 'Kỷ vật thiêng liêng gắn kết trọn đời hai tâm hồn.' },
+    { src: 'assets/images/gallery-18.jpg', title: 'Cái Chạm Nhẹ Yêu Thương', caption: 'Ấm áp tựa như những tia nắng mai chiếu rọi góc giáo đường.' },
+    { src: 'assets/images/gallery-19.jpg', title: 'Bình Yên Bên Nhau', caption: 'Giữa biển người bao la, thật may mắn khi ta đã tìm thấy nhau.' },
+    { src: 'assets/images/gallery-20.jpg', title: 'Mãi Mãi Một Tình Yêu', caption: 'Khởi đầu cho một chương mới đong đầy yêu thương và hy vọng.' }
   ];
 
   // Default Wedding Details Configuration
   const DEFAULT_CONFIG = {
-    theme: 'champagne-gold',
+    theme: 'royal-baroque',
     images: {
       hero: 'assets/images/wedding-hero.jpg',
       groom: 'assets/images/groom.jpg',
@@ -80,6 +134,7 @@ const WeddingAdmin = (function () {
       rings: 'assets/images/wedding-rings.jpg',
       walk: 'assets/images/wedding-walk.jpg'
     },
+    albumPhotos: DEFAULT_ALBUM_PHOTOS.slice(),
     guestMap: {},
     groom: {
       name: 'Tên Chú Rể',
@@ -127,6 +182,7 @@ const WeddingAdmin = (function () {
       const parsed = JSON.parse(data);
       return Object.assign({}, DEFAULT_CONFIG, parsed, {
         images: Object.assign({}, DEFAULT_CONFIG.images, parsed.images || {}),
+        albumPhotos: (Array.isArray(parsed.albumPhotos) && parsed.albumPhotos.length > 0) ? parsed.albumPhotos : DEFAULT_ALBUM_PHOTOS.slice(),
         guestMap: Object.assign({}, DEFAULT_CONFIG.guestMap, parsed.guestMap || {})
       });
     } catch (e) {
@@ -186,6 +242,7 @@ const WeddingAdmin = (function () {
     initBatchGenerator();
     initThemeSelector();
     initImageCustomizer();
+    initAlbum20Manager();
     initRSVPDashboard();
     initInfoEditor();
   }
@@ -336,13 +393,14 @@ const WeddingAdmin = (function () {
     if (!container) return;
 
     const cfg = getConfig();
-    const activeTheme = cfg.theme || 'champagne-gold';
+    const activeTheme = cfg.theme || 'royal-baroque';
 
     container.innerHTML = THEMES_CATALOG.map(t => {
-      const isActive = t.id === activeTheme;
+      const isSelected = (t.id === activeTheme) || (t.alias && t.alias.includes(activeTheme));
       return `
-        <div class="theme-card-preview ${isActive ? 'active' : ''}" onclick="WeddingAdmin.applyTheme('${t.id}')">
-          <div class="theme-active-tag"><i class="fa-solid fa-check"></i> Đang chọn</div>
+        <div class="theme-card-preview ${isSelected ? 'active' : ''}" onclick="WeddingAdmin.applyTheme('${t.id}')">
+          <div class="theme-active-tag"><i class="fa-solid fa-check"></i> Đang Chọn</div>
+          <div class="theme-badge-style"><i class="${t.icon || 'fa-solid fa-gem'}"></i> ${t.badge}</div>
           <div class="theme-chips-row">
             ${t.colors.map(c => `<span class="theme-color-chip" style="background:${c};"></span>`).join('')}
           </div>
@@ -367,7 +425,7 @@ const WeddingAdmin = (function () {
   }
 
   /* --------------------------------------------------------------------------
-     3. Image Customizer (Tùy Chỉnh Hình Ảnh Cưới)
+     3. Image Customizer (Tùy Chỉnh Hình Ảnh Cưới & Album 20 Ảnh Tự Động)
      -------------------------------------------------------------------------- */
   const IMAGE_SLOTS = [
     { key: 'hero', title: 'Ảnh Cổng Hoa / Banner Đầu Trang', defaultSrc: 'assets/images/wedding-hero.jpg' },
@@ -456,6 +514,147 @@ const WeddingAdmin = (function () {
 
     if (WeddingRSVP.showToast) {
       WeddingRSVP.showToast('🔄 Đã đặt lại ảnh mẫu ban đầu!');
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Album 20 Ảnh Cưới Trình Diễn Tự Động (Auto-Slideshow 20 Photos)
+     -------------------------------------------------------------------------- */
+  function initAlbum20Manager() {
+    const container = document.getElementById('admin-album-20-grid');
+    if (!container) return;
+
+    const cfg = getConfig();
+    const photos = (Array.isArray(cfg.albumPhotos) && cfg.albumPhotos.length > 0)
+      ? cfg.albumPhotos
+      : DEFAULT_ALBUM_PHOTOS;
+
+    container.innerHTML = photos.map((p, idx) => {
+      return `
+        <div class="album-slot-card" id="slot-card-${idx}">
+          <div class="album-slot-header">
+            <span class="album-slot-num"><i class="fa-solid fa-heart" style="color:var(--ruby-primary);"></i> Khoảnh Khắc #${idx + 1}</span>
+            <button type="button" class="btn-slot-reset" onclick="WeddingAdmin.resetAlbumPhoto(${idx})" title="Đặt lại ảnh mặc định slot này">
+              <i class="fa-solid fa-rotate-left"></i> Đặt lại
+            </button>
+          </div>
+
+          <div class="album-slot-preview" id="album-slot-box-${idx}">
+            <img src="${p.src}" alt="${escapeHTML(p.title || 'Ảnh ' + (idx + 1))}" id="album-slot-img-${idx}">
+          </div>
+
+          <div class="album-slot-body">
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="btn-upload-label" style="font-size:0.75rem; padding:6px 10px; margin-bottom:6px;">
+                <i class="fa-solid fa-upload"></i> Tải ảnh từ máy / điện thoại
+                <input type="file" accept="image/*" onchange="WeddingAdmin.handleAlbumPhotoUpload(${idx}, this)">
+              </label>
+              <input type="url" class="form-control" placeholder="Hoặc dán URL ảnh online..." value="${p.src.startsWith('data:') ? '' : escapeAttr(p.src)}" onchange="WeddingAdmin.handleAlbumPhotoUrl(${idx}, this.value)" style="font-size:0.75rem; padding:5px 8px;">
+            </div>
+
+            <div class="form-group" style="margin-bottom:6px;">
+              <input type="text" class="form-control" placeholder="Tiêu đề khoảnh khắc..." value="${escapeAttr(p.title || '')}" onchange="WeddingAdmin.handleAlbumPhotoText(${idx}, 'title', this.value)" style="font-size:0.75rem; padding:5px 8px; font-weight:600;">
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <textarea class="form-control" rows="2" placeholder="Chú thích lãng mạn..." onchange="WeddingAdmin.handleAlbumPhotoText(${idx}, 'caption', this.value)" style="font-size:0.72rem; padding:4px 6px;">${escapeHTML(p.caption || '')}</textarea>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function handleAlbumPhotoUpload(idx, inputEl) {
+    if (!inputEl.files || !inputEl.files[0]) return;
+    const file = inputEl.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const base64 = e.target.result;
+      const cfg = getConfig();
+      if (!Array.isArray(cfg.albumPhotos)) {
+        cfg.albumPhotos = DEFAULT_ALBUM_PHOTOS.slice();
+      }
+      if (!cfg.albumPhotos[idx]) {
+        cfg.albumPhotos[idx] = { src: '', title: `Khoảnh Khắc #${idx + 1}`, caption: '' };
+      }
+      cfg.albumPhotos[idx].src = base64;
+      saveConfig(cfg);
+
+      const imgEl = document.getElementById(`album-slot-img-${idx}`);
+      if (imgEl) imgEl.src = base64;
+
+      if (WeddingRSVP.showToast) {
+        WeddingRSVP.showToast(`🖼️ Đã cập nhật ảnh #${idx + 1} vào album!`);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleAlbumPhotoUrl(idx, url) {
+    url = url.trim();
+    if (!url) return;
+    const cfg = getConfig();
+    if (!Array.isArray(cfg.albumPhotos)) {
+      cfg.albumPhotos = DEFAULT_ALBUM_PHOTOS.slice();
+    }
+    if (!cfg.albumPhotos[idx]) {
+      cfg.albumPhotos[idx] = { src: '', title: `Khoảnh Khắc #${idx + 1}`, caption: '' };
+    }
+    cfg.albumPhotos[idx].src = url;
+    saveConfig(cfg);
+
+    const imgEl = document.getElementById(`album-slot-img-${idx}`);
+    if (imgEl) imgEl.src = url;
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast(`🖼️ Đã lưu URL ảnh #${idx + 1}!`);
+    }
+  }
+
+  function handleAlbumPhotoText(idx, field, value) {
+    const cfg = getConfig();
+    if (!Array.isArray(cfg.albumPhotos)) {
+      cfg.albumPhotos = DEFAULT_ALBUM_PHOTOS.slice();
+    }
+    if (!cfg.albumPhotos[idx]) {
+      cfg.albumPhotos[idx] = { src: '', title: '', caption: '' };
+    }
+    cfg.albumPhotos[idx][field] = value.trim();
+    saveConfig(cfg);
+  }
+
+  function resetAlbumPhoto(idx) {
+    const defaultP = DEFAULT_ALBUM_PHOTOS[idx];
+    if (!defaultP) return;
+
+    const cfg = getConfig();
+    if (!Array.isArray(cfg.albumPhotos)) {
+      cfg.albumPhotos = DEFAULT_ALBUM_PHOTOS.slice();
+    }
+    cfg.albumPhotos[idx] = Object.assign({}, defaultP);
+    saveConfig(cfg);
+
+    initAlbum20Manager();
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast(`🔄 Đã đặt lại ảnh #${idx + 1} về mặc định!`);
+    }
+  }
+
+  function restoreDefault20Photos() {
+    if (!confirm('Bạn có chắc muốn khôi phục toàn bộ 20 ảnh cưới về bộ ảnh mẫu siêu xinh ban đầu?')) {
+      return;
+    }
+    const cfg = getConfig();
+    cfg.albumPhotos = DEFAULT_ALBUM_PHOTOS.slice();
+    saveConfig(cfg);
+
+    initAlbum20Manager();
+
+    if (WeddingRSVP.showToast) {
+      WeddingRSVP.showToast('✨ Đã khôi phục thành công 20 ảnh cưới mẫu!');
     }
   }
 
@@ -699,9 +898,15 @@ const WeddingAdmin = (function () {
     handleImageUpload,
     handleImageUrl,
     resetImage,
+    handleAlbumPhotoUpload,
+    handleAlbumPhotoUrl,
+    handleAlbumPhotoText,
+    resetAlbumPhoto,
+    restoreDefault20Photos,
     deleteRSVPItem,
     renderRSVPTable,
-    THEMES_CATALOG
+    THEMES_CATALOG,
+    DEFAULT_ALBUM_PHOTOS
   };
 })();
 

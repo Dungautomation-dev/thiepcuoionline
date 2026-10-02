@@ -288,22 +288,54 @@ Chú Ba và Gia Đình"></textarea>
     </section>
 
     <!-- ========================================================================
-         TAB 3: TÙY CHỈNH HÌNH ẢNH CƯỚI (IMAGE CUSTOMIZER)
+         TAB 3: TÙY CHỈNH HÌNH ẢNH CƯỚI & ALBUM 20 ẢNH TỰ ĐỘNG
          ======================================================================== -->
     <section id="tab-images" class="admin-section">
-      <div style="margin-bottom:20px;">
-        <h2 style="font-family:var(--font-serif); font-size:1.4rem; color:var(--ruby-primary);">
-          <i class="fa-solid fa-images" style="color:var(--gold-primary); margin-right:8px;"></i>
-          Tùy Chỉnh Hình Ảnh Cưới Của Riêng Bạn
-        </h2>
-        <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
-          Tải ảnh thực tế của cô dâu chú rể từ điện thoại/máy tính hoặc dán link ảnh online (Imgur, Facebook, Cloudinary...). Có khung xem trước tức thì!
-        </p>
+      <div style="margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="font-family:var(--font-serif); font-size:1.4rem; color:var(--ruby-primary);">
+            <i class="fa-solid fa-images" style="color:var(--gold-primary); margin-right:8px;"></i>
+            Tùy Chỉnh Hình Ảnh &amp; Album 20 Ảnh Cưới
+          </h2>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
+            Quản lý ảnh đại diện dâu rể và bộ sưu tập 20 khoảnh khắc trình chiếu tự động ("tự động nhảy các ảnh siêu xinh").
+          </p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="index.html#gallery-section" target="_blank" class="tool-btn" style="width:auto; border-radius:20px; padding:0 16px; font-size:0.8rem; font-weight:700; text-decoration:none;">
+            <i class="fa-solid fa-play" style="margin-right:6px; color:var(--gold-primary);"></i> Xem Thử Slideshow
+          </a>
+          <button type="button" class="tool-btn" style="width:auto; border-radius:20px; padding:0 16px; font-size:0.8rem; font-weight:700;" onclick="WeddingAdmin.restoreDefault20Photos()">
+            <i class="fa-solid fa-rotate-left" style="margin-right:6px;"></i> Đặt Lại 20 Ảnh Mặc Định
+          </button>
+        </div>
       </div>
 
-      <!-- Image Customizer Grid -->
-      <div class="image-manager-grid" id="admin-images-grid">
-        <!-- Rendered dynamically by admin.js -->
+      <!-- Sub-section 1: 5 Key Wedding Profile Photos -->
+      <div style="margin-bottom:30px;">
+        <h3 style="font-size:1.05rem; font-weight:700; color:var(--ruby-primary); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-star" style="color:var(--gold-primary);"></i>
+          1. Ảnh Đại Diện Chính &amp; Chân Dung Dâu Rể
+        </h3>
+        <div class="image-manager-grid" id="admin-images-grid">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
+      </div>
+
+      <!-- Sub-section 2: 20-Photo Auto Slideshow Album Manager -->
+      <div>
+        <div style="margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <h3 style="font-size:1.05rem; font-weight:700; color:var(--ruby-primary); display:flex; align-items:center; gap:8px;">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--gold-primary);"></i>
+            2. Album 20 Ảnh Cưới Trình Diễn Tự Động (Auto-Slideshow 20 Photos)
+          </h3>
+          <span style="font-size:0.82rem; color:var(--text-muted);">
+            Tự động xoay tua Ken-Burns mỗi 3.8s • Hỗ trợ toàn màn hình &amp; Lightbox
+          </span>
+        </div>
+        <div class="album-20-manager-grid" id="admin-album-20-grid">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
       </div>
     </section>
 
