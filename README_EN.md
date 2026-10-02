@@ -69,18 +69,18 @@ Beyond color palettes, each theme represents a **completely distinct structural 
 
 > 💡 **Quick Preview**: Add `?theme=vogue-editorial`, `?theme=vintage-newspaper`, `?theme=cinematic-noir` etc. to the URL to instantly preview any style!
 
-### 4. 📸 20-Photo Album & Romantic Automated Slideshow
-* **Automated Ken-Burns Transitions**:
-  * Smooth auto-advancing slides every 3.8s with slow cinematic Ken-Burns zooms and crossfades.
-  * Auto-pauses on hover or mobile touch.
-  * Full controls: Play/Pause, Next/Previous, and Fullscreen cinematic projection mode.
-  * Real-time glowing Progress Bar indicator matching the active theme.
-  * Horizontal scrolling 20-thumbnail strip for direct navigation.
-* **20-Photo Mosaic Wall**:
-  * Beautiful responsive masonry grid displaying all 20 wedding moments with index badges `#1` to `#20` and romantic captions.
-  * High-resolution Lightbox Viewer with keyboard arrow navigation and mobile touch gestures.
-* **Admin Photo Manager**:
-  * Manage and customize all 20 photos + captions in the Admin panel (Base64 file upload or online URLs).
+### 4. 📖 20-Page Wedding Photo Lookbook (Book-Swipe Engine)
+* **Luxurious Photo Book Reading Experience**:
+  * Photos remain elegantly hidden behind the active page — **completely eliminating raw thumbnail strips and cluttered image grids**.
+  * Seamless **horizontal swipe gestures** (*Touch Swipe*) on mobile, drag gestures on desktop, and keyboard arrow controls.
+  * Realistic 3D page flip transitions (*Page Flip 3D*) and curved book spine shadow (*Book Spine Shadow*).
+* **Automated Page Turning & Smart Controls**:
+  * Automatically flips to the next wedding moment every 3.8s with romantic captions.
+  * Pauses smoothly on touch or hover.
+  * Full controls: Play/Pause, Next/Previous, and Fullscreen cinematic Lightbox mode.
+  * Minimal, discreet 20-dot page indicator bar.
+* **Admin Lookbook Manager**:
+  * Manage and customize all 20 pages + titles + captions in the Admin panel.
   * 1-Click restore to pre-loaded high-resolution romantic photos.
 
 ### 5. 🖼️ Personal Key Wedding Photos Customizer

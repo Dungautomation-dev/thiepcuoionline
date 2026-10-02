@@ -406,6 +406,12 @@ const WeddingAdmin = (function () {
           </div>
           <div class="theme-preview-name">${t.name}</div>
           <div class="theme-preview-desc">${t.desc}</div>
+          <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center;">
+            <a href="index.html?theme=${t.id}" target="_blank" class="theme-preview-link" onclick="event.stopPropagation();" title="Xem trước mẫu này trong tab mới">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Xem Thử Mẫu
+            </a>
+            <span style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-hand-pointer"></i> Bấm để chọn</span>
+          </div>
         </div>
       `;
     }).join('');

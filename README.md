@@ -70,18 +70,18 @@ Không chỉ thay đổi màu sắc, mỗi mẫu thiệp là **một cấu trúc
 > 💡 **Mẹo xem nhanh**: Bạn có thể xem trước bất kỳ mẫu thiệp nào bằng cách thêm tham số URL, ví dụ:  
 > `?theme=vogue-editorial` • `?theme=vintage-newspaper` • `?theme=cinematic-noir` • `?theme=traditional-hy`...
 
-### 4. 📸 Album 20 Ảnh Cưới & Trình Diễn Tự Động Siêu Xinh (Auto-Slideshow 20 Photos)
-* **Trình chiếu tự động Ken-Burns lãng mạn**:
-  * Tự động nhảy và chuyển ảnh mượt mà sau mỗi 3.8 giây kèm hiệu ứng zoom Ken-Burns nghệ thuật.
-  * Tự động tạm dừng khi rê chuột hoặc chạm tay trên màn hình điện thoại.
-  * Nút Play/Pause, chuyển ảnh Trước/Sau và nút **Toàn màn hình (Fullscreen)** để trình chiếu như một rạp chiếu phim mini.
-  * Thanh tiến trình thời gian thực (*Progress Bar*) phát sáng theo tông màu giao diện.
-  * Dải thumbnail trượt 20 ảnh nhỏ xinh bên dưới: click vào ảnh bất kỳ để nhảy tới ngay.
-* **Lưới 20 ảnh nghệ thuật (Mosaic Photo Wall)**:
-  * Trưng bày trọn vẹn 20 khoảnh khắc cưới với huy hiệu trái tim `#1` đến `#20`, tiêu đề và lời chú thích ngọt ngào.
-  * Chạm vào bất kỳ ảnh nào để phóng to với **Kính lúp Lightbox siêu nét**, hỗ trợ phím mũi tên và vuốt màn hình cảm ứng trên điện thoại.
+### 4. 📖 Cuốn Sách Ảnh Cưới 20 Trang Nghệ Thuật (Wedding Photo Lookbook)
+* **Trải nghiệm lật mở như đọc sách ảnh cao cấp (Book-Swipe Engine)**:
+  * Ảnh được ẩn tinh tế đằng sau trang hiện tại, **hoàn toàn loại bỏ dải thumbnail và lưới ảnh thô** làm rối mắt người xem.
+  * Hỗ trợ **lướt sang trái / vuốt sang phải mượt mà** (*Touch Swipe Gestures*) trên màn hình cảm ứng điện thoại, kéo chuột trên máy tính hoặc phím mũi tên bàn phím.
+  * Hiệu ứng chuyển động lật trang 3D sống động (*Page Flip 3D*) kèm hiệu ứng bóng gáy sách (*Book Spine Shadow*).
+* **Tự động lật trang & điều khiển thông minh**:
+  * Tự động lật mở trang ảnh mới mỗi 3.8 giây kèm lời tựa tình yêu lãng mạn.
+  * Tự động dừng khi chạm tay hoặc rê chuột vào ảnh.
+  * Nút Play/Pause, chuyển trang Trước/Sau và nút **Toàn màn hình (Fullscreen / Lightbox)** để chiêm ngưỡng ảnh nét căng.
+  * Dải 20 chấm chỉ mục trang (*Discreet Indicator Dots*) nhỏ gọn, thanh lịch.
 * **Quản lý linh hoạt trong Admin**:
-  * Chỉnh sửa ảnh và lời tựa cho từng ảnh trong 20 ảnh (upload file Base64 hoặc dán URL online).
+  * Chỉnh sửa ảnh và lời tựa cho từng trang trong 20 trang (upload file Base64 hoặc dán URL online).
   * 1-Click khôi phục bộ 20 ảnh mẫu siêu xinh mặc định.
 
 ### 5. 🖼️ Tùy Chỉnh Ảnh Đại Diện Chính & Cặp Đôi (Key Photos)

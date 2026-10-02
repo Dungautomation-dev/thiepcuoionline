@@ -1,6 +1,6 @@
 /**
- * Wedding Photo Gallery & Automated Slideshow Engine
- * 20-Photo Romantic Slideshow with Ken-Burns Transition, Thumbnails & Fullscreen Lightbox
+ * Wedding Photo Lookbook Engine (Cuốn Sách Ảnh Cưới 20 Trang Nghệ Thuật)
+ * Lướt trái/phải mượt mà như lật sách, tự động nhảy ảnh, ẩn thumbnail, không lộ lưới thô
  * Author: Dung Automation
  */
 
@@ -32,17 +32,18 @@ const WeddingGallery = (function () {
   let currentIndex = 0;
   let autoPlayTimer = null;
   let isPlaying = true;
-  const slideDuration = 3800; // 3.8 seconds per slide
+  const slideDuration = 3800; // 3.8 seconds per page
 
   // DOM Elements
-  let mainSlideImg = null;
-  let mainSlideTitle = null;
-  let mainSlideCaption = null;
-  let slideCounter = null;
+  let lookbookImg = null;
+  let lookbookTitle = null;
+  let lookbookCaption = null;
+  let pageCounter = null;
   let progressBar = null;
   let playPauseBtn = null;
-  let thumbnailsContainer = null;
-  let mosaicContainer = null;
+  let dotsContainer = null;
+  let stageEl = null;
+
   let lightboxEl = null;
   let lightboxImg = null;
   let lightboxTitle = null;
@@ -51,9 +52,8 @@ const WeddingGallery = (function () {
   function init() {
     loadPhotosData();
     cacheDOMElements();
-    renderSlideshow();
-    renderThumbnails();
-    renderMosaicGrid();
+    renderCurrentPage('next');
+    renderMinimalDots();
     setupEventListeners();
     startAutoPlay();
   }
@@ -70,14 +70,14 @@ const WeddingGallery = (function () {
   }
 
   function cacheDOMElements() {
-    mainSlideImg = document.getElementById('slideshow-current-img');
-    mainSlideTitle = document.getElementById('slideshow-slide-title');
-    mainSlideCaption = document.getElementById('slideshow-slide-caption');
-    slideCounter = document.getElementById('slideshow-slide-counter');
-    progressBar = document.getElementById('slideshow-progress-bar');
-    playPauseBtn = document.getElementById('btn-slideshow-playpause');
-    thumbnailsContainer = document.getElementById('slideshow-thumbnails');
-    mosaicContainer = document.getElementById('gallery-mosaic-grid');
+    lookbookImg = document.getElementById('lookbook-current-img');
+    lookbookTitle = document.getElementById('lookbook-slide-title');
+    lookbookCaption = document.getElementById('lookbook-slide-caption');
+    pageCounter = document.getElementById('lookbook-page-counter');
+    progressBar = document.getElementById('lookbook-progress-bar');
+    playPauseBtn = document.getElementById('btn-lookbook-playpause');
+    dotsContainer = document.getElementById('lookbook-dots');
+    stageEl = document.getElementById('lookbook-stage');
 
     lightboxEl = document.getElementById('lightbox-modal');
     lightboxImg = document.getElementById('lightbox-image');
@@ -85,153 +85,167 @@ const WeddingGallery = (function () {
     lightboxCounter = document.getElementById('lightbox-counter');
   }
 
-  function renderSlideshow() {
+  function renderCurrentPage(direction = 'next') {
     if (!albumPhotos || albumPhotos.length === 0) return;
     const item = albumPhotos[currentIndex];
     if (!item) return;
 
-    if (mainSlideImg) {
-      // Trigger Ken-Burns fade-in animation
-      mainSlideImg.classList.remove('slide-active');
-      void mainSlideImg.offsetWidth; // Force reflow
-      mainSlideImg.src = item.src;
-      mainSlideImg.alt = item.title || 'Ảnh cưới';
-      mainSlideImg.classList.add('slide-active');
+    if (lookbookImg) {
+      // Smooth Page Flip / Slide animation class
+      const animClass = direction === 'next' ? 'page-flip-next' : 'page-flip-prev';
+      lookbookImg.classList.remove('page-active', 'page-flip-next', 'page-flip-prev');
+      void lookbookImg.offsetWidth; // Force DOM reflow
+
+      lookbookImg.src = item.src;
+      lookbookImg.alt = item.title || `Trang ảnh ${currentIndex + 1}`;
+      lookbookImg.classList.add('page-active', animClass);
     }
 
-    if (mainSlideTitle) {
-      mainSlideTitle.textContent = item.title || `Khoảnh Khắc Kỷ Niệm #${currentIndex + 1}`;
+    if (lookbookTitle) {
+      lookbookTitle.textContent = item.title || `Khoảnh Khắc Kỷ Niệm #${currentIndex + 1}`;
     }
 
-    if (mainSlideCaption) {
-      mainSlideCaption.textContent = item.caption || 'Hành trình tình yêu đong đầy hạnh phúc.';
+    if (lookbookCaption) {
+      lookbookCaption.textContent = item.caption || 'Hành trình tình yêu đong đầy hạnh phúc.';
     }
 
-    if (slideCounter) {
+    if (pageCounter) {
       const pad = (n) => String(n).padStart(2, '0');
-      slideCounter.textContent = `${pad(currentIndex + 1)} / ${pad(albumPhotos.length)}`;
+      pageCounter.innerHTML = `<i class="fa-solid fa-book-bookmark" style="margin-right:6px; color:var(--gold-primary);"></i> Trang <strong>${pad(currentIndex + 1)}</strong> / ${pad(albumPhotos.length)}`;
     }
 
-    updateActiveThumbnail();
+    updateActiveDot();
     resetProgressBar();
   }
 
-  function renderThumbnails() {
-    if (!thumbnailsContainer) return;
-    thumbnailsContainer.innerHTML = albumPhotos.map((photo, idx) => `
-      <div class="slideshow-thumb-item ${idx === currentIndex ? 'active' : ''}" data-index="${idx}" title="${photo.title || 'Ảnh ' + (idx + 1)}">
-        <img src="${photo.src}" alt="${photo.title || 'Ảnh ' + (idx + 1)}" loading="lazy">
-        <span class="thumb-index-badge">${idx + 1}</span>
-      </div>
+  function renderMinimalDots() {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = albumPhotos.map((_, idx) => `
+      <button type="button" class="lookbook-dot ${idx === currentIndex ? 'active' : ''}" data-index="${idx}" title="Trang ${idx + 1}" aria-label="Chuyển đến trang ${idx + 1}"></button>
     `).join('');
 
-    const thumbs = thumbnailsContainer.querySelectorAll('.slideshow-thumb-item');
-    thumbs.forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        const idx = parseInt(thumb.getAttribute('data-index'), 10);
+    const dots = dotsContainer.querySelectorAll('.lookbook-dot');
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(dot.getAttribute('data-index'), 10);
         goToSlide(idx);
       });
     });
   }
 
-  function updateActiveThumbnail() {
-    if (!thumbnailsContainer) return;
-    const thumbs = thumbnailsContainer.querySelectorAll('.slideshow-thumb-item');
-    thumbs.forEach((t, i) => {
+  function updateActiveDot() {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.lookbook-dot');
+    dots.forEach((d, i) => {
       if (i === currentIndex) {
-        t.classList.add('active');
-        t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        d.classList.add('active');
       } else {
-        t.classList.remove('active');
+        d.classList.remove('active');
       }
-    });
-  }
-
-  function renderMosaicGrid() {
-    if (!mosaicContainer) return;
-    mosaicContainer.innerHTML = albumPhotos.map((photo, idx) => `
-      <div class="mosaic-photo-card" data-index="${idx}">
-        <div class="mosaic-img-box">
-          <img src="${photo.src}" alt="${photo.title || 'Khoảnh khắc'}" loading="lazy">
-          <div class="mosaic-overlay">
-            <span class="mosaic-index-badge"><i class="fa-solid fa-heart"></i> #${idx + 1}</span>
-            <div class="mosaic-info">
-              <h4 class="mosaic-title">${photo.title || 'Kỷ Niệm Ngày Chung Đôi'}</h4>
-              <p class="mosaic-desc">${photo.caption || 'Chạm để chiêm ngưỡng ảnh full'}</p>
-            </div>
-            <div class="mosaic-zoom-icon">
-              <i class="fa-solid fa-magnifying-glass-plus"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    `).join('');
-
-    const cards = mosaicContainer.querySelectorAll('.mosaic-photo-card');
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const idx = parseInt(card.getAttribute('data-index'), 10);
-        openLightbox(idx);
-      });
     });
   }
 
   function setupEventListeners() {
-    // Prev / Next Buttons
-    const prevBtn = document.getElementById('btn-slideshow-prev');
-    const nextBtn = document.getElementById('btn-slideshow-next');
+    // Navigation Buttons
+    const prevBtn = document.getElementById('btn-lookbook-prev');
+    const nextBtn = document.getElementById('btn-lookbook-next');
 
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide();
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+    });
 
     // Play/Pause Button
     if (playPauseBtn) {
-      playPauseBtn.addEventListener('click', toggleAutoPlay);
+      playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleAutoPlay();
+      });
     }
 
     // Fullscreen Button
-    const fsBtn = document.getElementById('btn-slideshow-fullscreen');
+    const fsBtn = document.getElementById('btn-lookbook-fullscreen');
     if (fsBtn) {
-      fsBtn.addEventListener('click', toggleFullscreen);
+      fsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFullscreen();
+      });
     }
 
-    // Pause on Hover
-    const stage = document.getElementById('slideshow-stage');
-    if (stage) {
-      stage.addEventListener('mouseenter', () => {
+    // Stage Interaction: Click opens Lightbox, Hover pauses
+    if (stageEl) {
+      stageEl.addEventListener('mouseenter', () => {
         pauseAutoPlay(false);
       });
-      stage.addEventListener('mouseleave', () => {
+      stageEl.addEventListener('mouseleave', () => {
         if (isPlaying) startAutoPlay();
       });
-      stage.addEventListener('click', (e) => {
-        if (!e.target.closest('.slideshow-ctrl-btn')) {
+      stageEl.addEventListener('click', (e) => {
+        if (!e.target.closest('.lookbook-ctrl-btn') && !e.target.closest('.lookbook-dot')) {
           openLightbox(currentIndex);
         }
       });
-    }
 
-    // Touch Swipe for Mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    if (stage) {
-      stage.addEventListener('touchstart', (e) => {
+      // Mobile Touch Swipe Handling
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      stageEl.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        pauseAutoPlay(false);
       }, { passive: true });
 
-      stage.addEventListener('touchend', (e) => {
+      stageEl.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipeGesture();
+        if (isPlaying) startAutoPlay();
       }, { passive: true });
-    }
 
-    function handleSwipe() {
-      const threshold = 40;
-      if (touchEndX < touchStartX - threshold) {
-        nextSlide();
-      } else if (touchEndX > touchStartX + threshold) {
-        prevSlide();
+      function handleSwipeGesture() {
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        // Ensure horizontal swipe is dominant over vertical scroll
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 35) {
+          if (deltaX < 0) {
+            nextSlide(); // Swipe left -> Next Page
+          } else {
+            prevSlide(); // Swipe right -> Previous Page
+          }
+        }
       }
+
+      // Desktop Mouse Drag Handling
+      let mouseStartX = 0;
+      let isMouseDown = false;
+
+      stageEl.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.lookbook-ctrl-btn')) return;
+        isMouseDown = true;
+        mouseStartX = e.clientX;
+      });
+
+      stageEl.addEventListener('mouseup', (e) => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        const deltaX = e.clientX - mouseStartX;
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      });
     }
 
     // Lightbox Controls
@@ -257,7 +271,11 @@ const WeddingGallery = (function () {
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowRight') nextLightbox();
         if (e.key === 'ArrowLeft') prevLightbox();
+        return;
       }
+      // If gallery is in viewport, allow arrow key navigation
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
     });
   }
 
@@ -269,7 +287,7 @@ const WeddingGallery = (function () {
     }, slideDuration);
     if (playPauseBtn) {
       playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-      playPauseBtn.title = 'Tạm dừng tự động chuyển ảnh';
+      playPauseBtn.title = 'Tạm dừng tự động lật trang';
     }
   }
 
@@ -289,7 +307,7 @@ const WeddingGallery = (function () {
       isPlaying = false;
       if (playPauseBtn) {
         playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        playPauseBtn.title = 'Tiếp tục tự động chuyển ảnh';
+        playPauseBtn.title = 'Tiếp tục tự động lật trang';
       }
     }
   }
@@ -314,25 +332,26 @@ const WeddingGallery = (function () {
 
   function nextSlide() {
     currentIndex = (currentIndex + 1) % albumPhotos.length;
-    renderSlideshow();
+    renderCurrentPage('next');
   }
 
   function prevSlide() {
     currentIndex = (currentIndex - 1 + albumPhotos.length) % albumPhotos.length;
-    renderSlideshow();
+    renderCurrentPage('prev');
   }
 
   function goToSlide(index) {
     if (index < 0 || index >= albumPhotos.length) return;
+    const direction = index >= currentIndex ? 'next' : 'prev';
     currentIndex = index;
-    renderSlideshow();
+    renderCurrentPage(direction);
     if (isPlaying) {
       startAutoPlay();
     }
   }
 
   function toggleFullscreen() {
-    const container = document.getElementById('wedding-slideshow-container');
+    const container = document.getElementById('wedding-lookbook-container');
     if (!container) return;
 
     if (!document.fullscreenElement) {
@@ -396,7 +415,7 @@ const WeddingGallery = (function () {
 
     if (lightboxCounter) {
       const pad = (n) => String(n).padStart(2, '0');
-      lightboxCounter.textContent = `${pad(lightboxIndex + 1)} / ${pad(albumPhotos.length)}`;
+      lightboxCounter.innerHTML = `<i class="fa-solid fa-images" style="margin-right:6px; color:var(--gold-primary);"></i> Trang ${pad(lightboxIndex + 1)} / ${pad(albumPhotos.length)}`;
     }
   }
 

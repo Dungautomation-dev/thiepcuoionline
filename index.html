@@ -297,71 +297,71 @@
     </section>
 
     <!-- ========================================================================
-         5. WEDDING PHOTO ALBUM GALLERY SECTION (20-PHOTO AUTO SLIDESHOW)
+         5. WEDDING PHOTO LOOKBOOK (20-PAGE BOOK FLIP / SWIPE)
          ======================================================================== -->
     <section class="gallery-section" id="gallery-section">
       <div class="section-heading">
-        <span class="section-tag"><i class="fa-solid fa-images"></i> Album Kỷ Niệm (20 Khoảnh Khắc)</span>
+        <span class="section-tag"><i class="fa-solid fa-book-open-reader"></i> Sách Ảnh Kỷ Niệm (20 Trang)</span>
         <h2 class="section-title">Khoảnh Khắc Yêu Thương</h2>
-        <p class="section-subtitle">Chương tình yêu trọn vẹn được lưu giữ qua từng khung hình ngọt ngào.</p>
+        <p class="section-subtitle">Lật mở từng trang ảnh ngọt ngào ghi dấu trọn vẹn hành trình chung đôi.</p>
       </div>
 
-      <!-- Featured Romantic Auto-Slideshow Container -->
-      <div class="wedding-slideshow-container" id="wedding-slideshow-container">
-        <!-- Stage Frame -->
-        <div class="slideshow-stage" id="slideshow-stage" title="Chạm để phóng to xem ảnh full">
-          <img src="assets/images/gallery-1.jpg" alt="Khoảnh khắc kỷ niệm" id="slideshow-current-img" class="slideshow-current-img slide-active">
+      <!-- Featured Romantic Auto Lookbook Container -->
+      <div class="wedding-lookbook-container" id="wedding-lookbook-container">
+        <!-- Main Book Stage -->
+        <div class="lookbook-stage" id="lookbook-stage" title="Chạm để xem ảnh full • Vuốt để lật trang">
+          <!-- 3D Book Spine Shadow -->
+          <div class="lookbook-spine-shadow"></div>
+
+          <!-- Current Page Image -->
+          <img src="assets/images/gallery-1.jpg" alt="Khoảnh khắc kỷ niệm" id="lookbook-current-img" class="lookbook-current-img page-active">
           
           <!-- Romantic Ken-Burns Vignette Overlay -->
-          <div class="slideshow-vignette-overlay"></div>
+          <div class="lookbook-vignette-overlay"></div>
 
-          <!-- Top Badge & Auto-Play Status -->
-          <div class="slideshow-top-bar">
-            <span class="slideshow-mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Tự Động Trình Chiếu</span>
-            <span class="slideshow-counter" id="slideshow-slide-counter">01 / 20</span>
+          <!-- Top Status Bar: Page Badge & Live Status -->
+          <div class="lookbook-top-bar">
+            <span class="lookbook-mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Tự Động Lật Trang</span>
+            <span class="lookbook-counter" id="lookbook-page-counter"><i class="fa-solid fa-book-bookmark" style="margin-right:6px; color:var(--gold-primary);"></i> Trang <strong>01</strong> / 20</span>
           </div>
 
-          <!-- Bottom Romantic Caption -->
-          <div class="slideshow-caption-overlay">
-            <h3 class="slideshow-title" id="slideshow-slide-title">Khoảnh Khắc Về Chung Một Nhà</h3>
-            <p class="slideshow-caption" id="slideshow-slide-caption">Ngày hạnh phúc nhất đời chúng mình bắt đầu từ nụ cười của em.</p>
+          <!-- Bottom Romantic Caption Overlay -->
+          <div class="lookbook-caption-overlay">
+            <h3 class="lookbook-title" id="lookbook-slide-title">Khoảnh Khắc Về Chung Một Nhà</h3>
+            <p class="lookbook-caption" id="lookbook-slide-caption">Ngày hạnh phúc nhất đời chúng mình bắt đầu từ nụ cười của em.</p>
           </div>
 
-          <!-- Smooth Progress Bar -->
-          <div class="slideshow-progress-track">
-            <div class="slideshow-progress-bar running" id="slideshow-progress-bar"></div>
+          <!-- Smooth Book Reading Progress Bar -->
+          <div class="lookbook-progress-track">
+            <div class="lookbook-progress-bar running" id="lookbook-progress-bar"></div>
           </div>
-        </div>
 
-        <!-- Interactive Control Bar -->
-        <div class="slideshow-controls-bar">
-          <button type="button" class="slideshow-ctrl-btn" id="btn-slideshow-prev" title="Ảnh trước">
+          <!-- Side Nav Page Turners -->
+          <button type="button" class="lookbook-side-nav prev" id="btn-lookbook-prev" title="Trang trước (Lướt sang phải)" aria-label="Trang trước">
             <i class="fa-solid fa-chevron-left"></i>
           </button>
-          <button type="button" class="slideshow-ctrl-btn btn-playpause" id="btn-slideshow-playpause" title="Tạm dừng / Tiếp tục">
-            <i class="fa-solid fa-pause"></i>
-          </button>
-          <button type="button" class="slideshow-ctrl-btn" id="btn-slideshow-next" title="Ảnh tiếp theo">
+          <button type="button" class="lookbook-side-nav next" id="btn-lookbook-next" title="Trang sau (Lướt sang trái)" aria-label="Trang sau">
             <i class="fa-solid fa-chevron-right"></i>
           </button>
-          <button type="button" class="slideshow-ctrl-btn btn-fs" id="btn-slideshow-fullscreen" title="Xem toàn màn hình">
+        </div>
+
+        <!-- Interactive Controls Bar -->
+        <div class="lookbook-controls-bar">
+          <button type="button" class="lookbook-ctrl-btn btn-playpause" id="btn-lookbook-playpause" title="Tạm dừng / Tiếp tục tự động lật">
+            <i class="fa-solid fa-pause"></i>
+          </button>
+          <div class="lookbook-hint-text">
+            <i class="fa-solid fa-hand-pointer"></i> Lướt sang trái/phải hoặc chạm để phóng to
+          </div>
+          <button type="button" class="lookbook-ctrl-btn btn-fs" id="btn-lookbook-fullscreen" title="Xem toàn màn hình">
             <i class="fa-solid fa-expand"></i>
           </button>
         </div>
 
-        <!-- Horizontal Scrollable Thumbnails Strip (20 Photos) -->
-        <div class="slideshow-thumbnails-strip" id="slideshow-thumbnails">
-          <!-- Dynamically populated with 20 mini thumbnails by gallery.js -->
+        <!-- Minimal Discreet Page Indicator Dots (20 Pages) -->
+        <div class="lookbook-dots-bar" id="lookbook-dots" title="Chọn trang ảnh">
+          <!-- Dynamically populated with 20 minimal dots by gallery.js -->
         </div>
-      </div>
-
-      <!-- 20-Photo Mosaic Wall (Masonry Photo Grid) -->
-      <div class="mosaic-gallery-header">
-        <h3 class="mosaic-section-title"><i class="fa-solid fa-heart" style="color:var(--ruby-primary);"></i> Trọn Vẹn 20 Khoảnh Khắc Hạnh Phúc</h3>
-        <span class="mosaic-section-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Bấm vào ảnh bất kỳ để xem toàn màn hình</span>
-      </div>
-      <div class="gallery-mosaic-grid" id="gallery-mosaic-grid">
-        <!-- Dynamically populated with 20 photo cards by gallery.js -->
       </div>
     </section>
 
