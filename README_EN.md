@@ -156,3 +156,10 @@ thiepcuoionline/
 Released under the **[MIT License](LICENSE)**. Free to use, adapt, and customize for personal or commercial wedding celebrations.
 
 Crafted with ❤️ by **[Dung Automation](https://github.com/Dungautomation-dev)**.
+
+---
+
+## Stars ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Dungautomation-dev/thiepcuoionline&type=Date)](https://star-history.com/#Dungautomation-dev/thiepcuoionline&Date)
+

@@ -176,3 +176,10 @@ thiepcuoionline/
 Phát hành theo giấy phép mã nguồn mở **MIT License**. Bạn được toàn quyền sử dụng, tùy chỉnh và triển khai cho ngày cưới của chính mình hoặc bạn bè.
 
 Thiết kế và xây dựng bởi **[Dung Automation](https://github.com/Dungautomation-dev)**.
+
+---
+
+## Stars ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Dungautomation-dev/thiepcuoionline&type=Date)](https://star-history.com/#Dungautomation-dev/thiepcuoionline&Date)
+
